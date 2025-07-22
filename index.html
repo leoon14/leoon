@@ -19,11 +19,11 @@
         }
         @keyframes slideInRight {
             from { transform: translateX(100%); }
-            to { transform: translateX(0); }
+            to { opacity: 1; transform: translateX(0); }
         }
         @keyframes slideInLeft {
             from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         /* Apply animations to corresponding classes */
@@ -79,6 +79,28 @@
             opacity: 1;
             pointer-events: auto; /* Enable interaction when visible */
         }
+
+        /* Search overlay */
+        .search-overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        /* Ensure search overlay can scroll if results are long */
+        #search-overlay .max-w-2xl {
+            max-height: 90vh; /* Adjust as needed */
+            overflow-y: auto;
+        }
+
+        /* Custom Message Box Styles */
+        #custom-message-box {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+        #custom-message-box-content {
+            animation: slideInUp 0.3s ease-out forwards;
+        }
     </style>
 </head>
 <body class="font-inter antialiased text-gray-800 bg-white">
@@ -102,60 +124,278 @@
         <!-- Desktop Menu -->
         <nav class="hidden lg:flex items-center space-x-8">
             <div class="relative group">
-                <button id="mega-menu-trigger" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">
+                <button id="mega-menu-trigger-hombre" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">
                     Hombre
                 </button>
-                <div id="mega-menu" class="absolute left-1/2 -translate-x-1/2 mt-0 w-[900px] bg-white shadow-xl rounded-b-lg p-8 grid grid-cols-3 gap-8 mega-menu-transition mega-menu-hidden">
+                <div id="mega-menu-hombre" class="absolute left-1/2 -translate-x-1/2 mt-0 w-[900px] bg-white shadow-xl rounded-b-lg p-8 grid grid-cols-3 gap-8 mega-menu-transition mega-menu-hidden">
                     <div>
                         <h3 class="font-bold text-lg mb-4">Calzado</h3>
                         <ul class="space-y-2 text-sm">
-                            <li><a href="#" class="hover:text-red-600">Running</a></li>
-                            <li><a href="#" class="hover:text-red-600">Basketball</a></li>
-                            <li><a href="#" class="hover:text-red-600">Fútbol</a></li>
-                            <li><a href="#" class="hover:text-red-600">Entrenamiento</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Zapatillas Running" data-gender="Hombre">Zapatillas Running</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Zapatillas Baloncesto" data-gender="Hombre">Zapatillas Baloncesto</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Guayos Fútbol" data-gender="Hombre">Guayos Fútbol</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Calzado Entrenamiento" data-gender="Hombre">Calzado Entrenamiento</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Sandalias" data-gender="Hombre">Sandalias y Chanclas</a></li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="font-bold text-lg mb-4">Ropa</h3>
                         <ul class="space-y-2 text-sm">
-                            <li><a href="#" class="hover:text-red-600">Camisetas</a></li>
-                            <li><a href="#" class="hover:text-red-600">Pantalones</a></li>
-                            <li><a href="#" class="hover:text-red-600">Chaquetas</a></li>
-                            <li><a href="#" class="hover:text-red-600">Sudaderas</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Camisetas" data-gender="Hombre">Camisetas y Polos</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Pantalones" data-gender="Hombre">Pantalones y Shorts</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Chaquetas" data-gender="Hombre">Chaquetas y Chalecos</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Sudaderas" data-gender="Hombre">Sudaderas y Buzos</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Ropa Interior" data-gender="Hombre">Ropa Interior Deportiva</a></li>
                         </ul>
                     </div>
-                    <div class="relative rounded-lg overflow-hidden">
-                        <img src="https://placehold.co/300x200/F0F0F0/333333?text=MegaMenu+Hombre" alt="Hombre Destacado" class="w-full h-full object-cover" loading="lazy" />
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                            <p class="text-white text-xl font-bold">Nueva Colección</p>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Accesorios y Equipo</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Mochilas" data-gender="Unisex">Mochilas y Bolsos</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Gorras" data-gender="Unisex">Gorras y Sombreros</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Guantes" data-gender="Unisex">Guantes y Bandas</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Balones" data-gender="Unisex">Balones (Fútbol, Baloncesto)</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Protección" data-gender="Unisex">Equipos de Protección</a></li>
+                        </ul>
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden col-span-3 mt-4">
+                        <img src="https://placehold.co/900x200/2A2A2A/FFFFFF?text=Colección+Hombre+SPORTIA" alt="Hombre Destacado" class="w-full h-full object-cover" loading="lazy" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center p-4">
+                            <p class="text-white text-2xl font-bold mb-2">Descubre la Fuerza Masculina</p>
+                            <p class="text-white text-md">Rendimiento y estilo para cada desafío.</p>
+                            <button class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-red-700 transition-colors duration-300 mega-menu-link" data-category="Todos" data-gender="Hombre">Ver Todo Hombre</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Mujer</a>
-            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Niños</a>
-            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Deportes</a>
-            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Colecciones</a>
-            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Outlet</a>
+
+            <div class="relative group">
+                <button id="mega-menu-trigger-mujer" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">
+                    Mujer
+                </button>
+                <div id="mega-menu-mujer" class="absolute left-1/2 -translate-x-1/2 mt-0 w-[900px] bg-white shadow-xl rounded-b-lg p-8 grid grid-cols-3 gap-8 mega-menu-transition mega-menu-hidden">
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Calzado</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Zapatillas Running" data-gender="Mujer">Zapatillas Running</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Calzado Entrenamiento" data-gender="Mujer">Zapatillas Entrenamiento</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Sandalias" data-gender="Mujer">Sandalias y Chanclas</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Ropa</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Camisetas" data-gender="Mujer">Camisetas y Tops</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Leggings" data-gender="Mujer">Leggings y Pantalones</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Sujetadores Deportivos" data-gender="Mujer">Sujetadores Deportivos</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Chaquetas" data-gender="Mujer">Chaquetas y Abrigos</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Sudaderas" data-gender="Mujer">Sudaderas y Buzos</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Accesorios y Equipo</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Mochilas" data-gender="Mujer">Mochilas y Bolsos</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Gorras" data-gender="Mujer">Gorras y Visores</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Guantes" data-gender="Mujer">Guantes y Accesorios</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Botellas" data-gender="Unisex">Botellas de Agua</a></li>
+                        </ul>
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden col-span-3 mt-4">
+                        <img src="https://placehold.co/900x200/FF69B4/FFFFFF?text=Colección+Mujer+SPORTIA" alt="Mujer Destacada" class="w-full h-full object-cover" loading="lazy" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center p-4">
+                            <p class="text-white text-2xl font-bold mb-2">Potencia tu Estilo Femenino</p>
+                            <p class="text-white text-md">Comodidad y rendimiento para la mujer moderna.</p>
+                            <button class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-red-700 transition-colors duration-300 mega-menu-link" data-category="Todos" data-gender="Mujer">Ver Todo Mujer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nuevo Mega Menú Niños -->
+            <div class="relative group">
+                <button id="mega-menu-trigger-ninos" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">
+                    Niños
+                </button>
+                <div id="mega-menu-ninos" class="absolute left-1/2 -translate-x-1/2 mt-0 w-[900px] bg-white shadow-xl rounded-b-lg p-8 grid grid-cols-3 gap-8 mega-menu-transition mega-menu-hidden">
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Calzado Niños</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Zapatillas Niños" data-gender="Niños">Zapatillas Casual</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Zapatillas Running Niños" data-gender="Niños">Zapatillas Running</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Sandalias Niños" data-gender="Niños">Sandalias y Chanclas</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Ropa Niños</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Camisetas Niños" data-gender="Niños">Camisetas y Polos</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Pantalones Niños" data-gender="Niños">Pantalones y Shorts</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Chaquetas Niños" data-gender="Niños">Chaquetas y Sudaderas</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Accesorios Niños</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Mochilas Niños" data-gender="Niños">Mochilas</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Gorras Niños" data-gender="Niños">Gorras</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Balones Niños" data-gender="Niños">Balones</a></li>
+                        </ul>
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden col-span-3 mt-4">
+                        <img src="https://placehold.co/900x200/87CEEB/FFFFFF?text=Colección+Niños+SPORTIA" alt="Niños Destacado" class="w-full h-full object-cover" loading="lazy" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center p-4">
+                            <p class="text-white text-2xl font-bold mb-2">Aventura para los Más Pequeños</p>
+                            <p class="text-white text-md">Equipamiento divertido y duradero para niños.</p>
+                            <button class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-red-700 transition-colors duration-300 mega-menu-link" data-category="Todos" data-gender="Niños">Ver Todo Niños</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nuevo Mega Menú Deportes -->
+            <div class="relative group">
+                <button id="mega-menu-trigger-deportes" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">
+                    Deportes
+                </button>
+                <div id="mega-menu-deportes" class="absolute left-1/2 -translate-x-1/2 mt-0 w-[900px] bg-white shadow-xl rounded-b-lg p-8 grid grid-cols-3 gap-8 mega-menu-transition mega-menu-hidden">
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Deportes Populares</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Fútbol" data-gender="Todos">Fútbol</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Baloncesto" data-gender="Todos">Baloncesto</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Running" data-gender="Todos">Running</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Tenis" data-gender="Todos">Tenis</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Equipamiento Específico</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Natación" data-gender="Todos">Natación</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Ciclismo" data-gender="Todos">Ciclismo</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Fitness" data-gender="Todos">Fitness y Gimnasio</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Yoga" data-gender="Todos">Yoga y Pilates</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Accesorios Deportivos</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Nutrición" data-gender="Todos">Nutrición Deportiva</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Electrónica" data-gender="Todos">Electrónica Deportiva</a></li>
+                            <li><a href="#nuestros-productos" class="hover:text-red-600 mega-menu-link" data-category="Recuperación" data-gender="Todos">Recuperación Muscular</a></li>
+                        </ul>
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden col-span-3 mt-4">
+                        <img src="https://placehold.co/900x200/006400/FFFFFF?text=Todas+las+Disciplinas+SPORTIA" alt="Deportes Destacado" class="w-full h-full object-cover" loading="lazy" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center p-4">
+                            <p class="text-white text-2xl font-bold mb-2">Tu Deporte, Tu Pasión</p>
+                            <p class="text-white text-md">Equipamiento para cada disciplina.</p>
+                            <button class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-red-700 transition-colors duration-300 mega-menu-link" data-category="Todos" data-gender="Todos">Ver Todo Deportes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative group">
+                <button id="mega-menu-trigger-colecciones" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">
+                    Colecciones
+                </button>
+                <div id="mega-menu-colecciones" class="absolute left-1/2 -translate-x-1/2 mt-0 w-[900px] bg-white shadow-xl rounded-b-lg p-8 grid grid-cols-2 gap-8 mega-menu-transition mega-menu-hidden">
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Colecciones Exclusivas</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#collections-section" class="hover:text-red-600 mega-menu-link" data-collection-type="Exclusiva">Élite Runner</a></li>
+                            <li><a href="#collections-section" class="hover:text-red-600 mega-menu-link" data-collection-type="Exclusiva">Urbano Sport</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Próximos Lanzamientos</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#collections-section" class="hover:text-red-600 mega-menu-link" data-collection-type="Próximamente">Invierno Extremo</a></li>
+                            <li><a href="#collections-section" class="hover:text-red-600 mega-menu-link" data-collection-type="Próximamente">Verano Activo</a></li>
+                        </ul>
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden col-span-2 mt-4">
+                        <img src="https://placehold.co/900x200/FFD700/000000?text=Explora+Nuestras+Colecciones+SPORTIA" alt="Colecciones Destacado" class="w-full h-full object-cover" loading="lazy" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center p-4">
+                            <p class="text-white text-2xl font-bold mb-2">Estilo y Rendimiento Único</p>
+                            <p class="text-white text-md">Descubre nuestras colecciones más innovadoras.</p>
+                            <button class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-red-700 transition-colors duration-300 mega-menu-link" data-collection-type="Todos">Ver Todas las Colecciones</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative group">
+                <button id="mega-menu-trigger-outlet" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">
+                    Outlet
+                </button>
+                <div id="mega-menu-outlet" class="absolute left-1/2 -translate-x-1/2 mt-0 w-[900px] bg-white shadow-xl rounded-b-lg p-8 grid grid-cols-2 gap-8 mega-menu-transition mega-menu-hidden">
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Ofertas Destacadas</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#outlet-section" class="hover:text-red-600 mega-menu-link" data-outlet-filter="Calzado">Calzado en Oferta</a></li>
+                            <li><a href="#outlet-section" class="hover:text-red-600 mega-menu-link" data-outlet-filter="Ropa">Ropa con Descuento</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Últimas Unidades</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#outlet-section" class="hover:text-red-600 mega-menu-link" data-outlet-filter="Accesorios">Accesorios en Liquidación</a></li>
+                            <li><a href="#outlet-section" class="hover:text-red-600 mega-menu-link" data-outlet-filter="Todos">Todo el Outlet</a></li>
+                        </ul>
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden col-span-2 mt-4">
+                        <img src="https://placehold.co/900x200/FF0000/FFFFFF?text=Grandes+Descuentos+SPORTIA" alt="Outlet Destacado" class="w-full h-full object-cover" loading="lazy" />
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center p-4">
+                            <p class="text-white text-2xl font-bold mb-2">Grandes Descuentos, Calidad Premium</p>
+                            <p class="text-white text-md">No te pierdas nuestras ofertas exclusivas.</p>
+                            <button class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-red-700 transition-colors duration-300 mega-menu-link" data-outlet-filter="Todos">Ver Todo el Outlet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nav>
 
-        <!-- Icons -->
+        <!-- Icons and Search -->
         <div class="flex items-center space-x-4">
-            <button class="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Buscar">
+            <!-- Search Button -->
+            <button id="search-button" class="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Buscar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
             </button>
-            <button class="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 hidden md:block" aria-label="Usuario">
+            <button id="user-account-button" class="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Usuario">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </button>
+            <button id="favorites-button" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Mis favoritos">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                <span id="favorites-item-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
             </button>
             <button id="cart-button" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Carrito de compras">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                <span id="cart-item-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                <span id="cart-item-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
             </button>
             <button id="mobile-menu-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 lg:hidden" aria-label="Abrir menú móvil">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
             </button>
         </div>
     </header>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="fixed inset-0 z-50 flex items-start justify-center p-4 pt-24 hidden search-overlay animate-fade-in">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl p-4 relative">
+            <input type="text" id="search-input" placeholder="Buscar productos..." class="w-full p-3 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-lg" />
+            <button id="clear-search" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 hidden" aria-label="Limpiar búsqueda">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            </button>
+            <button id="close-search-overlay" class="absolute top-2 right-2 p-2 rounded-full bg-gray-100 hover:bg-gray-200" aria-label="Cerrar búsqueda">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-700"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            </button>
+            <!-- Search Results within Overlay -->
+            <div id="search-results-overlay" class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- Search results will be injected here -->
+            </div>
+        </div>
+    </div>
 
     <!-- Mobile Menu (Overlay) -->
     <div id="mobile-menu" class="fixed inset-0 bg-white z-40 flex flex-col pt-20 px-6 lg:hidden hidden">
@@ -169,9 +409,13 @@
             <a href="#" class="py-2 hover:text-red-600">Deportes</a>
             <a href="#" class="py-2 hover:text-red-600">Colecciones</a>
             <a href="#" class="py-2 hover:text-red-600">Outlet</a>
-            <button class="flex items-center py-2 hover:text-red-600">
+            <button id="mobile-user-account-button" class="flex items-center py-2 hover:text-red-600">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 Mi Cuenta
+            </button>
+            <button id="mobile-favorites-button" class="flex items-center py-2 hover:text-red-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                Mis Favoritos
             </button>
         </nav>
     </div>
@@ -191,7 +435,7 @@
         <div class="p-6 border-t border-gray-200">
             <div class="flex justify-between items-center mb-4">
                 <span class="text-lg font-semibold">Subtotal:</span>
-                <span id="cart-subtotal" class="text-lg font-bold">$0.00</span>
+                <span id="cart-subtotal" class="text-lg font-bold">COP$0</span>
             </div>
             <button class="w-full bg-black text-white py-3 rounded-full font-bold text-lg hover:bg-red-600 transition-colors duration-300 transform hover:scale-105 shadow-lg">
                 Proceder al Pago
@@ -199,10 +443,55 @@
         </div>
     </div>
 
+    <!-- Favorites Sidebar -->
+    <div id="favorites-sidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="flex justify-between items-center p-6 border-b border-gray-200">
+            <h2 class="text-2xl font-bold">Mis Favoritos</h2>
+            <button id="close-favorites-sidebar" class="p-2 rounded-full hover:bg-gray-100" aria-label="Cerrar favoritos">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            </button>
+        </div>
+        <div id="favorites-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Favorite items will be injected here -->
+            <p id="empty-favorites-message" class="text-gray-500 text-center hidden">No tienes productos favoritos.</p>
+        </div>
+        <div class="p-6 border-t border-gray-200">
+            <button class="w-full bg-black text-white py-3 rounded-full font-bold text-lg hover:bg-red-600 transition-colors duration-300 transform hover:scale-105 shadow-lg">
+                Ver todos los favoritos
+            </button>
+        </div>
+    </div>
+
+    <!-- User Account Sidebar/Modal -->
+    <div id="user-account-sidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="flex justify-between items-center p-6 border-b border-gray-200">
+            <h2 class="text-2xl font-bold">Mi Cuenta</h2>
+            <button id="close-user-account-sidebar" class="p-2 rounded-full hover:bg-gray-100" aria-label="Cerrar cuenta">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-6 space-y-4">
+            <p class="text-gray-700">Bienvenido/a!</p>
+            <p class="text-gray-700 text-sm break-all">Tu ID de usuario: <span id="display-user-id" class="font-semibold">Cargando...</span></p>
+            <button id="logout-button" class="w-full bg-red-600 text-white py-2 rounded-full font-bold hover:bg-red-700 transition-colors duration-300">Cerrar Sesión</button>
+            <p class="text-sm text-gray-500 mt-4"> (Para fines de demostración, la sesión se maneja de forma simplificada.)</p>
+        </div>
+    </div>
+
+    <!-- Custom Message Box -->
+    <div id="custom-message-box" class="fixed inset-0 z-[100] flex items-center justify-center p-4 hidden">
+        <div id="custom-message-box-content" class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full text-center">
+            <p id="custom-message-box-text" class="text-lg font-semibold mb-6"></p>
+            <button id="custom-message-box-ok-button" class="bg-red-600 text-white px-6 py-2 rounded-full font-bold hover:bg-red-700 transition-colors duration-300">
+                Entendido
+            </button>
+        </div>
+    </div>
+
 
     <main class="mt-20">
         <!-- Hero Principal -->
-        <section class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
+        <section class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden" id="hero-section">
             <div id="hero-slider-container" class="absolute inset-0 flex transition-transform duration-700 ease-in-out">
                 <!-- Slides will be injected here by JavaScript -->
             </div>
@@ -222,7 +511,7 @@
         </section>
 
         <!-- Sección de colecciones destacadas -->
-        <section class="py-16 px-6 md:px-12 bg-gray-50">
+        <section class="py-16 px-6 md:px-12 bg-gray-50" id="featured-collections-section">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Explora Nuestras Colecciones</h2>
             <div id="featured-collections-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Collections will be injected here by JavaScript -->
@@ -230,7 +519,7 @@
         </section>
 
         <!-- Catálogo/product listing -->
-        <section class="py-16 px-6 md:px-12">
+        <section id="nuestros-productos" class="py-16 px-6 md:px-12">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Nuestros Productos</h2>
 
             <div class="flex flex-col lg:flex-row gap-8">
@@ -264,7 +553,7 @@
                         <div class="flex items-center space-x-2">
                             <input type="number" id="min-price" value="0" min="0" class="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500 text-sm" />
                             <span>-</span>
-                            <input type="number" id="max-price" value="500" min="0" class="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500 text-sm" />
+                            <input type="number" id="max-price" value="2000000" min="0" class="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500 text-sm" />
                         </div>
                     </div>
 
@@ -286,6 +575,26 @@
                 </div>
             </div>
         </section>
+
+        <!-- Nueva Sección de Colecciones -->
+        <section id="collections-section" class="py-16 px-6 md:px-12 hidden">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Nuestras Colecciones Exclusivas</h2>
+            <div id="collections-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Collections will be injected here -->
+            </div>
+        </section>
+
+        <!-- Nueva Sección de Outlet -->
+        <section id="outlet-section" class="py-16 px-6 md:px-12 hidden">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Outlet - Grandes Descuentos</h2>
+            <div id="outlet-product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Outlet products will be injected here -->
+            </div>
+            <div id="no-outlet-products-message" class="text-center text-gray-600 col-span-full hidden mt-8">
+                No hay productos en el outlet en este momento. Vuelve pronto para nuevas ofertas.
+            </div>
+        </section>
+
 
         <!-- Páginas de producto (Modal) -->
         <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4 hidden animate-fade-in">
@@ -423,7 +732,7 @@
                         <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 2.04C6.51 2.04 2.04 6.51 2.04 12C2.04 17.02 5.76 21.14 10.64 21.96V14.28H7.72V11.28H10.64V8.96C10.64 6.04 12.38 4.48 15.02 4.48C16.3 4.48 17.44 4.58 17.84 4.64V7.44H16.2C14.78 7.44 14.5 8.28 14.5 9.28V11.28H17.7L17.2 14.28H14.5V21.96C19.38 21.14 23.1 17.02 23.1 12C23.1 6.51 18.63 2.04 13.14 2.04H12Z"/></svg>
                     </a>
                     <a href="#" class="text-white hover:text-red-600 transition-colors duration-200" aria-label="Instagram">
-                        <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.25.06 1.95.21 2.38.37.6.19 1.05.42 1.5.87.45.45.68.9.87 1.5.16.43.31 1.13.37 2.38.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.06 1.25-.21 1.95-.37 2.38-.19.6-.42 1.05-.87 1.5-.45.45-.9.68-1.5.87-.43.16-1.13.31-2.38.37-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.25-.06-1.95-.21-2.38-.37-.6-.19-1.05-.42-1.5-.87-.45-.45-.68-.9-.87-1.5-.16-.43-.31-1.13-.37-2.38-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.06-1.25.21-1.95.37-2.38.19-.6.42-1.05.87-1.5.45-.45.9-.68 1.5-.87.43-.16 1.13-.31 2.38-.37 1.27-.06 1.65-.07 4.85-.07zm0-2.16c-3.25 0-3.67.01-4.94.07-1.3.06-2.1.23-2.67.45-.64.24-1.16.59-1.69 1.12-.53.53-.88 1.05-1.12 1.69-.22.57-.39 1.37-.45 2.67-.06 1.27-.07 1.69-.07 4.94s.01 3.67.07 4.94c.06 1.3.23 2.1.45 2.67.24.64.59 1.16 1.12 1.69.53.53 1.05.88 1.69 1.12.57.22 1.37.39 2.67.45 1.27.06 1.69.07 4.94.07s3.67-.01 4.94-.07c1.3-.06 2.1-.23 2.67-.45.64-.24 1.16-.59 1.69-1.12.53-.53.88-1.05 1.12-1.69.22-.57.39-1.37.45-2.67.06-1.27.07-1.69.07-4.94s-.01-3.67-.07-4.94c-.06-1.3-.23-2.1-.45-2.67-.24-.64-.59-1.16-1.12-1.69-.53-.53-1.05-.88-1.69-1.12-.57-.22-1.37-.39-2.67-.45-1.27-.06-1.69-.07-4.94-.07zm0 5.81c-3.41 0-6.19 2.78-6.19 6.19s2.78 6.19 6.19 6.19 6.19-2.78 6.19-6.19-2.78-6.19-6.19-6.19zm0 10.19c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm6.4-11.23c-.76 0-1.38.62-1.38 1.38s.62 1.38 1.38 1.38 1.38-.62 1.38-1.38-.62-1.38-1.38-1.38z"/></svg>
+                        <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.25.06 1.95.21 2.38.37.6.19 1.05.42 1.5.87.45.45.68.9.87 1.5.16.43.31 1.13.37 2.38.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.06 1.25-.21 1.95-.37 2.38-.19.6-.42 1.05-.87 1.5-.45.45-.9.68-1.5.87-.43.16-1.13.31-2.38.37-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.25-.06-1.95-.21-2.38-.37-.6-.19-1.05-.42-1.5-.87-.45-.45-.68-.9-.87-1.5-.16-.43-.31-1.13-.37-2.38-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.06-1.25.21-1.95.37-2.38.19-.6.42-1.05.87-1.5.45-.45.9-.68 1.5-.87.43-.16 1.13-.31 2.38-.37 1.27-.06 1.69-.07 4.85-.07zm0-2.16c-3.25 0-3.67.01-4.94.07-1.3.06-2.1.23-2.67.45-.64.24-1.16.59-1.69 1.12-.53.53-.88 1.05-1.12 1.69-.22.57-.39 1.37-.45 2.67-.06 1.27-.07 1.69-.07 4.94s.01 3.67.07 4.94c.06 1.3.23 2.1.45 2.67.24.64.59 1.16 1.12 1.69.53.53 1.05.88 1.69 1.12.57.22 1.37.39 2.67.45 1.27.06 1.69.07 4.94.07s3.67-.01 4.94-.07c1.3-.06 2.1-.23 2.67-.45.64-.24 1.16-.59 1.69-1.12-.53-.53-.88-1.05-1.12-1.69-.22-.57-.39-1.37-.45-2.67-.06-1.27-.07-1.69-.07-4.94s-.01-3.67-.07-4.94c-.06-1.3-.23-2.1-.45-2.67-.24-.64-.59-1.16-1.12-1.69-.53-.53-1.05-.88-1.69-1.12-.57-.22-1.37-.39-2.67-.45-1.27-.06-1.69-.07-4.94-.07zm0 5.81c-3.41 0-6.19 2.78-6.19 6.19s2.78 6.19 6.19 6.19 6.19-2.78 6.19-6.19-2.78-6.19-6.19-6.19zm0 10.19c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm6.4-11.23c-.76 0-1.38.62-1.38 1.38s.62 1.38 1.38 1.38 1.38-.62 1.38-1.38-.62-1.38-1.38-1.38z"/></svg>
                     </a>
                     <a href="#" class="text-white hover:text-red-600 transition-colors duration-200" aria-label="Twitter">
                         <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.37-.83.49-1.74.84-2.7.1-.82-.82-2.07-1.33-3.44-1.33-2.6 0-4.7 2.1-4.7 4.7 0 .37.04.73.11 1.08-3.91-.2-7.37-2.07-9.7-4.9-.4.69-.63 1.49-.63 2.37 0 1.63.83 3.06 2.09 3.9-.77-.02-1.49-.23-2.13-.59v.06c0 2.28 1.62 4.18 3.77 4.6-.39.1-.8.15-1.22.15-.3 0-.59-.03-.87-.08.6 1.87 2.34 3.23 4.4 3.27-1.61 1.26-3.64 2.02-5.83 2.02-.38 0-.76-.02-1.13-.07 2.08 1.34 4.56 2.13 7.23 2.13 8.67 0 13.4-7.16 13.4-13.4 0-.2-.01-.4-.02-.6.92-.66 1.72-1.48 2.36-2.42z"/></svg>
@@ -473,8 +782,53 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m18 15-6-6-6 6"></path></svg>
     </button>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // --- Firebase Setup ---
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+            let app;
+            let db;
+            let auth;
+            let currentUserId = null;
+            let isAuthReady = false;
+
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        currentUserId = user.uid;
+                        console.log("Usuario autenticado:", currentUserId);
+                        document.getElementById('display-user-id').textContent = currentUserId;
+                        isAuthReady = true;
+                        // Fetch liked products after auth is ready
+                        setupLikedProductsListener();
+                    } else {
+                        console.log("Usuario no autenticado. Iniciando sesión anónimamente...");
+                        try {
+                            if (initialAuthToken) {
+                                await signInWithCustomToken(auth, initialAuthToken);
+                            } else {
+                                await signInAnonymously(auth);
+                            }
+                        } catch (error) {
+                            console.error("Error al iniciar sesión:", error);
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+            }
+
             // --- Data Mock ---
             const heroSlides = [
                 {
@@ -537,92 +891,707 @@
                 },
             ];
 
+            // Conversion rate from USD to COP
+            const USD_TO_COP_RATE = 4000;
+
             const products = [
+                // Productos de Hombre
                 {
                     id: 1,
                     name: 'Zapatillas Air Max 270',
-                    category: 'Running',
-                    price: 150.00,
+                    category: 'Zapatillas Running',
+                    gender: 'Hombre',
+                    price: 150.00 * USD_TO_COP_RATE,
                     rating: 4.5,
                     colors: ['#000000', '#FFFFFF', '#FF0000'],
                     sizes: ['US 7', 'US 8', 'US 9', 'US 10', 'US 11'],
-                    image: 'https://placehold.co/300x300/000000/FFFFFF?text=Producto+1',
-                    altImage: 'https://placehold.co/300x300/333333/FFFFFF?text=Producto+1+Alt',
+                    image: 'https://placehold.co/300x300/000000/FFFFFF?text=Running+Shoe',
+                    altImage: 'https://placehold.co/300x300/333333/FFFFFF?text=Running+Shoe+Alt',
                     description: 'Las zapatillas Air Max 270 ofrecen una comodidad inigualable y un estilo moderno, perfectas para el día a día o tus carreras ligeras.',
                     video: 'https://cdn.shopify.com/s/files/1/0533/2089/files/product_video_1.mp4?v=1613564500',
                     reviews: [
                         { id: 1, author: 'Juan P.', rating: 5, text: '¡Excelente producto, muy cómodas y con un diseño increíble!' },
                         { id: 2, author: 'María G.', rating: 4, text: 'Me encantan, aunque la talla es un poco ajustada.' },
                     ],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: 'Élite Runner',
+                    relatedProducts: [7, 21, 12]
                 },
                 {
                     id: 2,
                     name: 'Camiseta Dri-FIT Pro',
-                    category: 'Entrenamiento',
-                    price: 45.00,
+                    category: 'Camisetas',
+                    gender: 'Hombre',
+                    price: 45.00 * USD_TO_COP_RATE,
                     rating: 4.8,
                     colors: ['#000000', '#008000', '#0000FF'],
                     sizes: ['S', 'M', 'L', 'XL'],
-                    image: 'https://placehold.co/300x300/1A1A1A/FFFFFF?text=Producto+2',
-                    altImage: 'https://placehold.co/300x300/444444/FFFFFF?text=Producto+2+Alt',
+                    image: 'https://placehold.co/300x300/1A1A1A/FFFFFF?text=Pro+T-Shirt',
+                    altImage: 'https://placehold.co/300x300/444444/FFFFFF?text=Pro+T-Shirt+Alt',
                     description: 'La camiseta Dri-FIT Pro te mantiene seco y cómodo durante tus entrenamientos más intensos. Su tejido ligero y transpirable es ideal para cualquier actividad física.',
                     reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: 'Urbano Sport',
+                    relatedProducts: [4, 6, 22]
                 },
                 {
                     id: 3,
                     name: 'Balón de Baloncesto Elite',
-                    category: 'Basketball',
-                    price: 80.00,
+                    category: 'Balones',
+                    gender: 'Unisex',
+                    price: 80.00 * USD_TO_COP_RATE,
                     rating: 4.7,
                     colors: ['#FFA500', '#000000'],
                     sizes: ['Talla 7'],
-                    image: 'https://placehold.co/300x300/333333/FFFFFF?text=Producto+3',
-                    altImage: 'https://placehold.co/300x300/555555/FFFFFF?text=Producto+3+Alt',
+                    image: 'https://placehold.co/300x300/333333/FFFFFF?text=Basketball',
+                    altImage: 'https://placehold.co/300x300/555555/FFFFFF?text=Basketball+Alt',
                     description: 'El balón de baloncesto Elite ofrece un agarre superior y un control preciso, diseñado para jugadores que buscan el máximo rendimiento en la cancha.',
                     reviews: [
                         { id: 1, author: 'Carlos R.', rating: 5, text: 'El mejor balón que he tenido, excelente agarre.' },
                     ],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [21, 32, 8]
                 },
                 {
                     id: 4,
-                    name: 'Leggings Epic Lux',
-                    category: 'Running',
-                    price: 90.00,
+                    name: 'Pantalón Corto Epic',
+                    category: 'Pantalones',
+                    gender: 'Hombre',
+                    price: 60.00 * USD_TO_COP_RATE,
                     rating: 4.6,
-                    colors: ['#000000', '#800080'],
-                    sizes: ['XS', 'S', 'M', 'L'],
-                    image: 'https://placehold.co/300x300/444444/FFFFFF?text=Producto+4',
-                    altImage: 'https://placehold.co/300x300/666666/FFFFFF?text=Producto+4+Alt',
-                    description: 'Los leggings Epic Lux combinan comodidad y soporte, ideales para correr o para tus sesiones de yoga. Su tejido elástico se adapta a cada movimiento.',
+                    colors: ['#000000', '#808080'],
+                    sizes: ['S', 'M', 'L', 'XL'],
+                    image: 'https://placehold.co/300x300/444444/FFFFFF?text=Epic+Shorts',
+                    altImage: 'https://placehold.co/300x300/666666/FFFFFF?text=Epic+Shorts+Alt',
+                    description: 'Pantalones cortos ligeros y transpirables, ideales para cualquier tipo de entrenamiento o actividad deportiva.',
                     reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: 'Urbano Sport',
+                    relatedProducts: [2, 23, 6]
                 },
                 {
                     id: 5,
                     name: 'Guayos Mercurial Vapor',
-                    category: 'Fútbol',
-                    price: 220.00,
+                    category: 'Guayos Fútbol',
+                    gender: 'Hombre',
+                    price: 220.00 * USD_TO_COP_RATE,
                     rating: 4.9,
                     colors: ['#FF0000', '#000000', '#00FF00'],
                     sizes: ['EU 40', 'EU 41', 'EU 42', 'EU 43', 'EU 44'],
-                    image: 'https://placehold.co/300x300/555555/FFFFFF?text=Producto+5',
-                    altImage: 'https://placehold.co/300x300/777777/FFFFFF?text=Producto+5+Alt',
+                    image: 'https://placehold.co/300x300/555555/FFFFFF?text=Football+Cleats',
+                    altImage: 'https://placehold.co/300x300/777777/FFFFFF?text=Football+Cleats+Alt',
                     description: 'Los guayos Mercurial Vapor están diseñados para la velocidad, con un ajuste ceñido y una tracción explosiva que te permite superar a tus oponentes.',
                     reviews: [
                         { id: 1, author: 'Andrés M.', rating: 5, text: 'Increíbles, muy ligeros y con un toque excelente.' },
                     ],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [32, 1, 7]
                 },
                 {
                     id: 6,
                     name: 'Sudadera Tech Fleece',
-                    category: 'Entrenamiento',
-                    price: 110.00,
+                    category: 'Sudaderas',
+                    gender: 'Hombre',
+                    price: 110.00 * USD_TO_COP_RATE,
                     rating: 4.7,
                     colors: ['#000000', '#808080', '#FFFFFF'],
                     sizes: ['S', 'M', 'L', 'XL'],
-                    image: 'https://placehold.co/300x300/666666/FFFFFF?text=Producto+6',
-                    altImage: 'https://placehold.co/300x300/888888/FFFFFF?text=Producto+6+Alt',
+                    image: 'https://placehold.co/300x300/666666/FFFFFF?text=Tech+Fleece',
+                    altImage: 'https://placehold.co/300x300/888888/FFFFFF?text=Tech+Fleece+Alt',
                     description: 'La sudadera Tech Fleece ofrece calidez sin peso, perfecta para el calentamiento o para un look casual y deportivo.',
                     reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [2, 4, 24]
+                },
+                {
+                    id: 7,
+                    name: 'Zapatillas de Entrenamiento Flex',
+                    category: 'Calzado Entrenamiento',
+                    gender: 'Hombre',
+                    price: 95.00 * USD_TO_COP_RATE,
+                    rating: 4.4,
+                    colors: ['#000000', '#00FFFF'],
+                    sizes: ['US 7', 'US 8', 'US 9', 'US 10'],
+                    image: 'https://placehold.co/300x300/777777/FFFFFF?text=Training+Shoe',
+                    altImage: 'https://placehold.co/300x300/999999/FFFFFF?text=Training+Shoe+Alt',
+                    description: 'Zapatillas versátiles para entrenamiento, con flexibilidad y soporte para todo tipo de ejercicios.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: 'Élite Runner',
+                    relatedProducts: [1, 20, 35]
+                },
+                {
+                    id: 8,
+                    name: 'Mochila Deportiva Essential',
+                    category: 'Mochilas',
+                    gender: 'Unisex',
+                    price: 55.00 * USD_TO_COP_RATE,
+                    rating: 4.7,
+                    colors: ['#000000', '#808080', '#0000FF'],
+                    sizes: ['Única'],
+                    image: 'https://placehold.co/300x300/888888/FFFFFF?text=Sport+Bag',
+                    altImage: 'https://placehold.co/300x300/AAAAAA/FFFFFF?text=Sport+Bag+Alt',
+                    description: 'Mochila espaciosa y duradera, ideal para llevar tu equipo al gimnasio o tus viajes cortos.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [31, 28, 10]
+                },
+                {
+                    id: 9,
+                    name: 'Gorra Clásica Ajustable',
+                    category: 'Gorras',
+                    gender: 'Unisex',
+                    price: 25.00 * USD_TO_COP_RATE,
+                    rating: 4.2,
+                    colors: ['#000000', '#FFFFFF', '#FF0000'],
+                    sizes: ['Talla Única'],
+                    image: 'https://placehold.co/300x300/999999/FFFFFF?text=Classic+Cap',
+                    altImage: 'https://placehold.co/300x300/BBBBBB/FFFFFF?text=Classic+Cap+Alt',
+                    description: 'Gorra clásica con ajuste trasero, perfecta para protegerte del sol con estilo.',
+                    reviews: [],
+                    isOutlet: true,
+                    originalPrice: 35.00 * USD_TO_COP_RATE,
+                    collection: null,
+                    relatedProducts: [12, 16, 29]
+                },
+                {
+                    id: 10,
+                    name: 'Guantes de Entrenamiento Power',
+                    category: 'Guantes',
+                    gender: 'Unisex',
+                    price: 35.00 * USD_TO_COP_RATE,
+                    rating: 4.5,
+                    colors: ['#000000', '#FF0000'],
+                    sizes: ['S', 'M', 'L'],
+                    image: 'https://placehold.co/300x300/AAAAAA/FFFFFF?text=Training+Gloves',
+                    altImage: 'https://placehold.co/300x300/CCCCCC/FFFFFF?text=Training+Gloves+Alt',
+                    description: 'Guantes acolchados para levantamiento de pesas y entrenamiento, que ofrecen agarre y protección.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [36, 8, 28]
+                },
+                {
+                    id: 11,
+                    name: 'Sandalias Confort Slide',
+                    category: 'Sandalias',
+                    gender: 'Hombre',
+                    price: 30.00 * USD_TO_COP_RATE,
+                    rating: 4.1,
+                    colors: ['#000000', '#0000FF'],
+                    sizes: ['US 7', 'US 8', 'US 9', 'US 10', 'US 11'],
+                    image: 'https://placehold.co/300x300/BBBBBB/FFFFFF?text=Comfort+Slides',
+                    altImage: 'https://placehold.co/300x300/DDDDDD/FFFFFF?text=Comfort+Slides+Alt',
+                    description: 'Sandalias cómodas y ligeras, ideales para después del entrenamiento o para uso casual.',
+                    reviews: [],
+                    isOutlet: true,
+                    originalPrice: 40.00 * USD_TO_COP_RATE,
+                    collection: null,
+                    relatedProducts: [13, 17, 29]
+                },
+                {
+                    id: 12,
+                    name: 'Chaqueta Cortavientos Essential',
+                    category: 'Chaquetas',
+                    gender: 'Hombre',
+                    price: 85.00 * USD_TO_COP_RATE,
+                    rating: 4.6,
+                    colors: ['#000000', '#008000'],
+                    sizes: ['S', 'M', 'L', 'XL'],
+                    image: 'https://placehold.co/300x300/CCCCCC/FFFFFF?text=Windbreaker',
+                    altImage: 'https://placehold.co/300x300/EEEEEE/FFFFFF?text=Windbreaker+Alt',
+                    description: 'Chaqueta cortavientos ligera y plegable, perfecta para actividades al aire libre con clima variable.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [6, 24, 16]
+                },
+                {
+                    id: 21,
+                    name: 'Zapatillas Baloncesto Elite',
+                    category: 'Zapatillas Baloncesto',
+                    gender: 'Hombre',
+                    price: 180.00 * USD_TO_COP_RATE,
+                    rating: 4.7,
+                    colors: ['#00008B', '#FFFFFF', '#FF4500'],
+                    sizes: ['US 8', 'US 9', 'US 10', 'US 11', 'US 12'],
+                    image: 'https://placehold.co/300x300/00008B/FFFFFF?text=Basketball+Hombre',
+                    altImage: 'https://placehold.co/300x300/4169E1/FFFFFF?text=Basketball+Hombre+Alt',
+                    description: 'Diseñadas para la cancha, ofrecen excelente tracción y soporte para movimientos explosivos.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [3, 5, 7]
+                },
+                {
+                    id: 22,
+                    name: 'Polo Performance',
+                    category: 'Camisetas',
+                    gender: 'Hombre',
+                    price: 55.00 * USD_TO_COP_RATE,
+                    rating: 4.5,
+                    colors: ['#FFFFFF', '#000000', '#808080'],
+                    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+                    image: 'https://placehold.co/300x300/FFFFFF/000000?text=Polo+Hombre',
+                    altImage: 'https://placehold.co/300x300/F0F0F0/000000?text=Polo+Hombre+Alt',
+                    description: 'Polo de tejido transpirable, ideal para golf o uso casual deportivo, mantiene la frescura.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [2, 19, 25]
+                },
+                {
+                    id: 23,
+                    name: 'Shorts de Compresión',
+                    category: 'Pantalones',
+                    gender: 'Hombre',
+                    price: 40.00 * USD_TO_COP_RATE,
+                    rating: 4.9,
+                    colors: ['#000000', '#696969'],
+                    sizes: ['S', 'M', 'L', 'XL'],
+                    image: 'https://placehold.co/300x300/000000/FFFFFF?text=Compresión+Hombre',
+                    altImage: 'https://placehold.co/300x300/36454F/FFFFFF?text=Compresión+Hombre+Alt',
+                    description: 'Ofrecen soporte muscular y reducen la fatiga, perfectos para entrenamientos intensos.',
+                    reviews: [],
+                    isOutlet: true,
+                    originalPrice: 50.00 * USD_TO_COP_RATE,
+                    collection: null,
+                    relatedProducts: [4, 14, 26]
+                },
+                {
+                    id: 24,
+                    name: 'Buzo con Capucha',
+                    category: 'Sudaderas',
+                    gender: 'Hombre',
+                    price: 75.00 * USD_TO_COP_RATE,
+                    rating: 4.6,
+                    colors: ['#000000', '#808080', '#2F4F4F'],
+                    sizes: ['S', 'M', 'L', 'XL'],
+                    image: 'https://placehold.co/300x300/2F4F4F/FFFFFF?text=Buzo+Hombre',
+                    altImage: 'https://placehold.co/300x300/696969/FFFFFF?text=Buzo+Hombre+Alt',
+                    description: 'Cómodo y cálido, ideal para el calentamiento o para un estilo casual en días fríos.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [6, 12, 27]
+                },
+                {
+                    id: 25,
+                    name: 'Boxers Deportivos (3-pack)',
+                    category: 'Ropa Interior',
+                    gender: 'Hombre',
+                    price: 30.00 * USD_TO_COP_RATE,
+                    rating: 4.7,
+                    colors: ['#000000', '#808080', '#0000FF'],
+                    sizes: ['S', 'M', 'L', 'XL'],
+                    image: 'https://placehold.co/300x300/0000FF/FFFFFF?text=Boxers+Hombre',
+                    altImage: 'https://placehold.co/300x300/4169E1/FFFFFF?text=Boxers+Hombre+Alt',
+                    description: 'Diseñados para el confort y la transpirabilidad durante la actividad física.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [2, 19, 22]
+                },
+
+                // Productos de Mujer
+                {
+                    id: 13,
+                    name: 'Zapatillas Running Glide',
+                    category: 'Zapatillas Running',
+                    gender: 'Mujer',
+                    price: 130.00 * USD_TO_COP_RATE,
+                    rating: 4.7,
+                    colors: ['#FF69B4', '#FFFFFF', '#800080'],
+                    sizes: ['US 6', 'US 7', 'US 8', 'US 9', 'US 10'],
+                    image: 'https://placehold.co/300x300/FF69B4/FFFFFF?text=Running+Mujer',
+                    altImage: 'https://placehold.co/300x300/E0E0E0/FF69B4?text=Running+Mujer+Alt',
+                    description: 'Zapatillas de running diseñadas para la mujer, con amortiguación suave y ajuste adaptable para mayor comodidad en cada kilómetro.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [1, 7, 20]
+                },
+                {
+                    id: 14,
+                    name: 'Leggings de Entrenamiento Sculpt',
+                    category: 'Leggings',
+                    gender: 'Mujer',
+                    price: 70.00 * USD_TO_COP_RATE,
+                    rating: 4.9,
+                    colors: ['#000000', '#800080', '#FF69B4'],
+                    sizes: ['XS', 'S', 'M', 'L'],
+                    image: 'https://placehold.co/300x300/800080/FFFFFF?text=Leggings+Mujer',
+                    altImage: 'https://placehold.co/300x300/663399/FFFFFF?text=Leggings+Mujer+Alt',
+                    description: 'Leggings de alta compresión que moldean la figura y ofrecen soporte durante entrenamientos intensos. Tejido transpirable y elástico.',
+                    reviews: [{ id: 1, author: 'Ana R.', rating: 5, text: '¡Me encantan! Muy cómodos y el ajuste es perfecto.' }],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [4, 23, 26]
+                },
+                {
+                    id: 15,
+                    name: 'Sujetador Deportivo Impacto Medio',
+                    category: 'Sujetadores Deportivos',
+                    gender: 'Mujer',
+                    price: 40.00 * USD_TO_COP_RATE,
+                    rating: 4.6,
+                    colors: ['#000000', '#FFFFFF', '#FF69B4'],
+                    sizes: ['S', 'M', 'L'],
+                    image: 'https://placehold.co/300x300/FF69B4/000000?text=Sujetador',
+                    altImage: 'https://placehold.co/300x300/FFC0CB/000000?text=Sujetador+Alt',
+                    description: 'Sujetador deportivo de impacto medio, ideal para actividades como yoga, pilates o entrenamiento funcional. Ofrece buen soporte y comodidad.',
+                    reviews: [],
+                    isOutlet: true,
+                    originalPrice: 55.00 * USD_TO_COP_RATE,
+                    collection: null,
+                    relatedProducts: [19, 27, 26]
+                },
+                {
+                    id: 16,
+                    name: 'Chaqueta Deportiva Ligera',
+                    category: 'Chaquetas',
+                    gender: 'Mujer',
+                    price: 95.00 * USD_TO_COP_RATE,
+                    rating: 4.5,
+                    colors: ['#000000', '#008000', '#800080'],
+                    sizes: ['XS', 'S', 'M', 'L'],
+                    image: 'https://placehold.co/300x300/008000/FFFFFF?text=Chaqueta+Mujer',
+                    altImage: 'https://placehold.co/300x300/3CB371/FFFFFF?text=Chaqueta+Mujer+Alt',
+                    description: 'Chaqueta ligera y resistente al viento, perfecta para correr al aire libre o como capa adicional en tus entrenamientos.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [12, 24, 9]
+                },
+                {
+                    id: 17,
+                    name: 'Sandalias Cloudfoam',
+                    category: 'Sandalias',
+                    gender: 'Mujer',
+                    price: 35.00 * USD_TO_COP_RATE,
+                    rating: 4.3,
+                    colors: ['#000000', '#FFFFFF', '#FF69B4'],
+                    sizes: ['US 5', 'US 6', 'US 7', 'US 8', 'US 9'],
+                    image: 'https://placehold.co/300x300/FFFFFF/FF69B4?text=Sandalias+Mujer',
+                    altImage: 'https://placehold.co/300x300/F0F0F0/FF69B4?text=Sandalias+Mujer+Alt',
+                    description: 'Sandalias con plantilla acolchada Cloudfoam para una comodidad excepcional después del ejercicio o para uso diario.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [11, 29, 13]
+                },
+                {
+                    id: 18,
+                    name: 'Mochila Urbana Fit',
+                    category: 'Mochilas',
+                    gender: 'Mujer',
+                    price: 65.00 * USD_TO_COP_RATE,
+                    rating: 4.8,
+                    colors: ['#000000', '#800080', '#FF69B4'],
+                    sizes: ['Única'],
+                    image: 'https://placehold.co/300x300/800080/FFFFFF?text=Mochila+Mujer',
+                    altImage: 'https://placehold.co/300x300/6A5ACD/FFFFFF?text=Mochila+Mujer+Alt',
+                    description: 'Mochila compacta y estilizada, con compartimentos específicos para tu equipo de gimnasio y objetos personales.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [8, 31, 28]
+                },
+                {
+                    id: 19,
+                    name: 'Camiseta de Entrenamiento Flow',
+                    category: 'Camisetas',
+                    gender: 'Mujer',
+                    price: 38.00 * USD_TO_COP_RATE,
+                    rating: 4.7,
+                    colors: ['#FFFFFF', '#FF69B4', '#00FFFF'],
+                    sizes: ['XS', 'S', 'M', 'L'],
+                    image: 'https://placehold.co/300x300/FFC0CB/000000?text=Camiseta+Mujer',
+                    altImage: 'https://placehold.co/300x300/FFB6C1/000000?text=Camiseta+Mujer+Alt',
+                    description: 'Camiseta ligera y transpirable, ideal para entrenamientos de alta intensidad o para un look casual y cómodo.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [2, 15, 22]
+                },
+                {
+                    id: 20,
+                    name: 'Zapatillas Entrenamiento Crossfit',
+                    category: 'Calzado Entrenamiento',
+                    gender: 'Mujer',
+                    price: 110.00 * USD_TO_COP_RATE,
+                    rating: 4.6,
+                    colors: ['#000000', '#FF0000', '#FFFFFF'],
+                    sizes: ['US 6', 'US 7', 'US 8', 'US 9'],
+                    image: 'https://placehold.co/300x300/FF0000/FFFFFF?text=Crossfit+Mujer',
+                    altImage: 'https://placehold.co/300x300/CD5C5C/FFFFFF?text=Crossfit+Mujer+Alt',
+                    description: 'Zapatillas robustas para crossfit y levantamiento de pesas, que ofrecen estabilidad y durabilidad en cada movimiento.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [7, 13, 35]
+                },
+                {
+                    id: 26,
+                    name: 'Pantalón Jogger Relax',
+                    category: 'Leggings',
+                    gender: 'Mujer',
+                    price: 65.00 * USD_TO_COP_RATE,
+                    rating: 4.4,
+                    colors: ['#000000', '#808080', '#D3D3D3'],
+                    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+                    image: 'https://placehold.co/300x300/808080/FFFFFF?text=Jogger+Mujer',
+                    altImage: 'https://placehold.co/300x300/A9A9A9/FFFFFF?text=Jogger+Mujer+Alt',
+                    description: 'Pantalón jogger suave y cómodo, ideal para relajarse o para un estilo casual deportivo.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [14, 23, 27]
+                },
+                {
+                    id: 27,
+                    name: 'Buzo Crop Top',
+                    category: 'Sudaderas',
+                    gender: 'Mujer',
+                    price: 50.00 * USD_TO_COP_RATE,
+                    rating: 4.5,
+                    colors: ['#000000', '#FF69B4', '#FFFFFF'],
+                    sizes: ['XS', 'S', 'M', 'L'],
+                    image: 'https://placehold.co/300x300/FF69B4/000000?text=Crop+Top+Buzo',
+                    altImage: 'https://placehold.co/300x300/FFC0CB/000000?text=Crop+Top+Buzo+Alt',
+                    description: 'Buzo corto moderno y cómodo, perfecto para combinar con leggings de tiro alto.',
+                    reviews: [],
+                    isOutlet: true,
+                    originalPrice: 70.00 * USD_TO_COP_RATE,
+                    collection: null,
+                    relatedProducts: [15, 26, 19]
+                },
+                {
+                    id: 28,
+                    name: 'Botella de Agua Deportiva',
+                    category: 'Botellas',
+                    gender: 'Unisex',
+                    price: 15.00 * USD_TO_COP_RATE,
+                    rating: 4.8,
+                    colors: ['#0000FF', '#00FFFF', '#FF69B4'],
+                    sizes: ['750ml'],
+                    image: 'https://placehold.co/300x300/0000FF/FFFFFF?text=Botella+Agua',
+                    altImage: 'https://placehold.co/300x300/4169E1/FFFFFF?text=Botella+Agua+Alt',
+                    description: 'Botella de agua duradera y a prueba de fugas, esencial para mantenerte hidratado.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [8, 18, 10]
+                },
+                // Nuevos productos para Niños
+                {
+                    id: 29,
+                    name: 'Zapatillas Niños Playful',
+                    category: 'Zapatillas Niños',
+                    gender: 'Niños',
+                    price: 70.00 * USD_TO_COP_RATE,
+                    rating: 4.6,
+                    colors: ['#FFD700', '#00BFFF', '#FF69B4'],
+                    sizes: ['EU 28', 'EU 30', 'EU 32', 'EU 34'],
+                    image: 'https://placehold.co/300x300/FFD700/000000?text=Zapatillas+Niños',
+                    altImage: 'https://placehold.co/300x300/DAA520/000000?text=Zapatillas+Niños+Alt',
+                    description: 'Zapatillas cómodas y coloridas, ideales para el juego diario y la escuela.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [11, 17, 30]
+                },
+                {
+                    id: 30,
+                    name: 'Camiseta Niños Aventura',
+                    category: 'Camisetas Niños',
+                    gender: 'Niños',
+                    price: 25.00 * USD_TO_COP_RATE,
+                    rating: 4.5,
+                    colors: ['#32CD32', '#FF4500', '#1E90FF'],
+                    sizes: ['4T', '6T', '8T', '10T'],
+                    image: 'https://placehold.co/300x300/32CD32/FFFFFF?text=Camiseta+Niños',
+                    altImage: 'https://placehold.co/300x300/6B8E23/FFFFFF?text=Camiseta+Niños+Alt',
+                    description: 'Camiseta de algodón suave con diseños divertidos, perfecta para cualquier aventura.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [29, 31, 22]
+                },
+                {
+                    id: 31,
+                    name: 'Mochila Escolar Dino',
+                    category: 'Mochilas Niños',
+                    gender: 'Niños',
+                    price: 45.00 * USD_TO_COP_RATE,
+                    rating: 4.8,
+                    colors: ['#4682B4', '#A0522D'],
+                    sizes: ['Única'],
+                    image: 'https://placehold.co/300x300/4682B4/FFFFFF?text=Mochila+Niños',
+                    altImage: 'https://placehold.co/300x300/6A5ACD/FFFFFF?text=Mochila+Niños+Alt',
+                    description: 'Mochila espaciosa con diseño de dinosaurio, ideal para libros y juguetes.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [8, 18, 28]
+                },
+                // Nuevos productos para Deportes
+                {
+                    id: 32,
+                    name: 'Balón de Fútbol Pro Match',
+                    category: 'Fútbol',
+                    gender: 'Unisex',
+                    price: 90.00 * USD_TO_COP_RATE,
+                    rating: 4.9,
+                    colors: ['#FFFFFF', '#000000'],
+                    sizes: ['Talla 5'],
+                    image: 'https://placehold.co/300x300/FFFFFF/000000?text=Balón+Fútbol',
+                    altImage: 'https://placehold.co/300x300/F0F0F0/000000?text=Balón+Fútbol+Alt',
+                    description: 'Balón de fútbol de calidad profesional para partidos y entrenamientos intensos.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [3, 5, 21]
+                },
+                {
+                    id: 33,
+                    name: 'Raqueta de Tenis Avanzada',
+                    category: 'Tenis',
+                    gender: 'Unisex',
+                    price: 180.00 * USD_TO_COP_RATE,
+                    rating: 4.7,
+                    colors: ['#000000', '#FFD700'],
+                    sizes: ['Grip 2', 'Grip 3'],
+                    image: 'https://placehold.co/300x300/000000/FFD700?text=Raqueta+Tenis',
+                    altImage: 'https://placehold.co/300x300/36454F/FFD700?text=Raqueta+Tenis+Alt',
+                    description: 'Raqueta de tenis diseñada para jugadores avanzados, con excelente control y potencia.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [34, 35, 10]
+                },
+                {
+                    id: 34,
+                    name: 'Gafas de Natación Anti-Niebla',
+                    category: 'Natación',
+                    gender: 'Unisex',
+                    price: 30.00 * USD_TO_COP_RATE,
+                    rating: 4.6,
+                    colors: ['#00BFFF', '#FF69B4', '#000000'],
+                    sizes: ['Única'],
+                    image: 'https://placehold.co/300x300/00BFFF/FFFFFF?text=Gafas+Natación',
+                    altImage: 'https://placehold.co/300x300/87CEEB/FFFFFF?text=Gafas+Natación+Alt',
+                    description: 'Gafas de natación con tecnología anti-niebla para una visión clara bajo el agua.',
+                    reviews: [],
+                    isOutlet: true,
+                    originalPrice: 45.00 * USD_TO_COP_RATE,
+                    collection: null,
+                    relatedProducts: [33, 35, 28]
+                },
+                {
+                    id: 35,
+                    name: 'Casco de Ciclismo Aero',
+                    category: 'Ciclismo',
+                    gender: 'Unisex',
+                    price: 120.00 * USD_TO_COP_RATE,
+                    rating: 4.8,
+                    colors: ['#FF4500', '#000000', '#FFFFFF'],
+                    sizes: ['S', 'M', 'L'],
+                    image: 'https://placehold.co/300x300/FF4500/FFFFFF?text=Casco+Ciclismo',
+                    altImage: 'https://placehold.co/300x300/CD5C5C/FFFFFF?text=Casco+Ciclismo+Alt',
+                    description: 'Casco aerodinámico y ligero para ciclismo de carretera, ofrece máxima protección y ventilación.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [7, 20, 36]
+                },
+                {
+                    id: 36,
+                    name: 'Bandas de Resistencia (Set)',
+                    category: 'Fitness',
+                    gender: 'Unisex',
+                    price: 25.00 * USD_TO_COP_RATE,
+                    rating: 4.5,
+                    colors: ['#FF0000', '#008000', '#0000FF'],
+                    sizes: ['Set'],
+                    image: 'https://placehold.co/300x300/FF0000/FFFFFF?text=Bandas+Resistencia',
+                    altImage: 'https://placehold.co/300x300/CD5C5C/FFFFFF?text=Bandas+Resistencia+Alt',
+                    description: 'Set de bandas de resistencia para entrenamiento de fuerza y flexibilidad, ideal para gimnasio en casa.',
+                    reviews: [],
+                    isOutlet: false,
+                    originalPrice: null,
+                    collection: null,
+                    relatedProducts: [10, 35, 28]
+                },
+            ];
+
+            const collectionsData = [
+                {
+                    id: 1,
+                    name: 'Colección Élite Runner',
+                    description: 'Diseñada para la velocidad y la resistencia. Prendas y calzado con tecnología de punta para corredores de alto rendimiento.',
+                    status: 'Exclusiva',
+                    image: 'https://placehold.co/600x400/FF0000/FFFFFF?text=Elite+Runner+Collection',
+                    productsIncluded: [1, 7], // IDs of products belonging to this collection
+                },
+                {
+                    id: 2,
+                    name: 'Colección Urbano Sport',
+                    description: 'Estilo deportivo para el día a día. Comodidad y diseño moderno que se adapta a tu ritmo urbano.',
+                    status: 'Exclusiva',
+                    image: 'https://placehold.co/600x400/0000FF/FFFFFF?text=Urban+Sport+Collection',
+                    productsIncluded: [2, 4],
+                },
+                {
+                    id: 3,
+                    name: 'Colección Invierno Extremo',
+                    description: 'Prepárate para el frío con nuestra línea de ropa térmica y accesorios resistentes. Próximo lanzamiento.',
+                    status: 'Próximamente',
+                    launchDate: '15 de Diciembre, 2025',
+                    image: 'https://placehold.co/600x400/808080/FFFFFF?text=Winter+Collection+Soon',
+                    productsIncluded: [], // No products yet
+                },
+                {
+                    id: 4,
+                    name: 'Colección Verano Activo',
+                    description: 'Frescura y ligereza para tus actividades bajo el sol. Ropa transpirable y accesorios esenciales.',
+                    status: 'Próximamente',
+                    launchDate: '1 de Marzo, 2026',
+                    image: 'https://placehold.co/600x400/FFA500/FFFFFF?text=Summer+Collection+Soon',
+                    productsIncluded: [], // No products yet
                 },
             ];
 
@@ -632,21 +1601,35 @@
                 size: 'Todos',
                 color: 'Todos',
                 minPrice: 0,
-                maxPrice: 500,
-                sport: 'Todos', // Not fully implemented in filters, but kept for data consistency
+                maxPrice: 2000000, // Update max price filter to COP
+                searchTerm: '',
+                gender: 'Todos', // New filter for gender
+                collectionType: 'Todos', // New filter for collections
+                outletFilter: 'Todos' // New filter for outlet
             };
 
             // Global cart state
             let cartItems = []; // Array of { product, quantity, selectedSize, selectedColor }
             let cartTotal = 0;
+            let likedProducts = []; // Array of liked product IDs
 
             // --- DOM Elements ---
             const header = document.getElementById('main-header');
             const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
             const closeMobileMenu = document.getElementById('close-mobile-menu');
-            const megaMenuTrigger = document.getElementById('mega-menu-trigger');
-            const megaMenu = document.getElementById('mega-menu');
+            const megaMenuTriggerHombre = document.getElementById('mega-menu-trigger-hombre');
+            const megaMenuHombre = document.getElementById('mega-menu-hombre');
+            const megaMenuTriggerMujer = document.getElementById('mega-menu-trigger-mujer');
+            const megaMenuMujer = document.getElementById('mega-menu-mujer');
+            const megaMenuTriggerNinos = document.getElementById('mega-menu-trigger-ninos');
+            const megaMenuNinos = document.getElementById('mega-menu-ninos');
+            const megaMenuTriggerDeportes = document.getElementById('mega-menu-trigger-deportes');
+            const megaMenuDeportes = document.getElementById('mega-menu-deportes');
+            const megaMenuTriggerColecciones = document.getElementById('mega-menu-trigger-colecciones'); // New
+            const megaMenuColecciones = document.getElementById('mega-menu-colecciones'); // New
+            const megaMenuTriggerOutlet = document.getElementById('mega-menu-trigger-outlet'); // New
+            const megaMenuOutlet = document.getElementById('mega-menu-outlet'); // New
             const heroSliderContainer = document.getElementById('hero-slider-container');
             const heroPrevBtn = document.getElementById('hero-prev');
             const heroNextBtn = document.getElementById('hero-next');
@@ -671,6 +1654,14 @@
             const backToTopBtn = document.getElementById('back-to-top');
             const currentYearSpan = document.getElementById('current-year');
 
+            // Search elements
+            const searchButton = document.getElementById('search-button');
+            const searchOverlay = document.getElementById('search-overlay');
+            const searchInput = document.getElementById('search-input');
+            const clearSearchButton = document.getElementById('clear-search');
+            const closeSearchOverlayButton = document.getElementById('close-search-overlay');
+            const searchResultsOverlay = document.getElementById('search-results-overlay'); // New element
+
             // Cart elements
             const cartButton = document.getElementById('cart-button');
             const cartSidebar = document.getElementById('cart-sidebar');
@@ -679,21 +1670,63 @@
             const cartSubtotal = document.getElementById('cart-subtotal');
             const emptyCartMessage = document.getElementById('empty-cart-message');
 
+            // Favorites elements
+            const favoritesButton = document.getElementById('favorites-button');
+            const favoritesItemCount = document.getElementById('favorites-item-count');
+            const favoritesSidebar = document.getElementById('favorites-sidebar');
+            const closeFavoritesSidebar = document.getElementById('close-favorites-sidebar');
+            const favoritesItemsContainer = document.getElementById('favorites-items-container');
+            const emptyFavoritesMessage = document.getElementById('empty-favorites-message');
+            const mobileFavoritesButton = document.getElementById('mobile-favorites-button');
+
+            // User Account elements
+            const userAccountButton = document.getElementById('user-account-button');
+            const mobileUserAccountButton = document.getElementById('mobile-user-account-button');
+            const userAccountSidebar = document.getElementById('user-account-sidebar');
+            const closeUserAccountSidebar = document.getElementById('close-user-account-sidebar');
+            const logoutButton = document.getElementById('logout-button');
+            const displayUserId = document.getElementById('display-user-id');
+
+            // Custom Message Box elements
+            const customMessageBox = document.getElementById('custom-message-box');
+            const customMessageBoxText = document.getElementById('custom-message-box-text');
+            const customMessageBoxOkButton = document.getElementById('custom-message-box-ok-button');
+
+            // New section elements
+            const collectionsSection = document.getElementById('collections-section');
+            const collectionsGrid = document.getElementById('collections-grid');
+            const outletSection = document.getElementById('outlet-section');
+            const outletProductGrid = document.getElementById('outlet-product-grid');
+            const noOutletProductsMessage = document.getElementById('no-outlet-products-message');
+            const nuestrosProductosSection = document.getElementById('nuestros-productos');
+            const heroSection = document.getElementById('hero-section');
+            const featuredCollectionsSection = document.getElementById('featured-collections-section');
+
 
             // --- State Variables (simulated) ---
             let currentHeroSlideIndex = 0;
 
             // --- Utility Functions ---
+            function formatPrice(price) {
+                return `COP$${price.toLocaleString('es-CO', { minimumFractionDigits: 0 })}`;
+            }
+
             function updateCartCount() {
-                const cartCountElement = document.getElementById('cart-item-count');
                 const totalItemsInCart = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-                if (cartCountElement) {
-                    cartCountElement.textContent = totalItemsInCart;
-                    if (totalItemsInCart > 0) {
-                        cartCountElement.classList.remove('hidden');
-                    } else {
-                        cartCountElement.classList.add('hidden');
-                    }
+                document.getElementById('cart-item-count').textContent = totalItemsInCart;
+                if (totalItemsInCart > 0) {
+                    document.getElementById('cart-item-count').classList.remove('hidden');
+                } else {
+                    document.getElementById('cart-item-count').classList.add('hidden');
+                }
+            }
+
+            function updateFavoritesCount() {
+                favoritesItemCount.textContent = likedProducts.length;
+                if (likedProducts.length > 0) {
+                    favoritesItemCount.classList.remove('hidden');
+                } else {
+                    favoritesItemCount.classList.add('hidden');
                 }
             }
 
@@ -703,6 +1736,23 @@
                     starsHtml += `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 ${i < Math.floor(rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
                 }
                 return starsHtml;
+            }
+
+            // --- Custom Message Box Functions ---
+            function showCustomMessageBox(message, callback = null) {
+                customMessageBoxText.textContent = message;
+                customMessageBox.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+
+                const handleOkClick = () => {
+                    customMessageBox.classList.add('hidden');
+                    document.body.style.overflow = 'auto'; // Restore scrolling
+                    customMessageBoxOkButton.removeEventListener('click', handleOkClick); // Clean up
+                    if (callback) {
+                        callback();
+                    }
+                };
+                customMessageBoxOkButton.addEventListener('click', handleOkClick);
             }
 
             // --- Header Logic ---
@@ -727,28 +1777,50 @@
                 document.body.style.overflow = 'auto';
             });
 
-            // Mega Menu Toggle
-            let megaMenuTimeout;
-            megaMenuTrigger.addEventListener('mouseenter', () => {
-                clearTimeout(megaMenuTimeout);
-                megaMenu.classList.remove('mega-menu-hidden');
-                megaMenu.classList.add('mega-menu-visible');
-            });
-            megaMenuTrigger.addEventListener('mouseleave', () => {
-                megaMenuTimeout = setTimeout(() => {
-                    megaMenu.classList.remove('mega-menu-visible');
-                    megaMenu.classList.add('mega-menu-hidden');
-                }, 200); // Small delay to allow mouse to enter mega menu
-            });
-            megaMenu.addEventListener('mouseenter', () => {
-                clearTimeout(megaMenuTimeout);
-            });
-            megaMenu.addEventListener('mouseleave', () => {
-                megaMenuTimeout = setTimeout(() => {
-                    megaMenu.classList.remove('mega-menu-visible');
-                    megaMenu.classList.add('mega-menu-hidden');
-                }, 200);
-            });
+            // Mega Menu Toggle Function
+            function setupMegaMenu(triggerId, menuId) {
+                const trigger = document.getElementById(triggerId);
+                const menu = document.getElementById(menuId);
+                let timeout;
+
+                if (!trigger || !menu) return;
+
+                trigger.addEventListener('mouseenter', () => {
+                    clearTimeout(timeout);
+                    // Hide other mega menus if open
+                    [megaMenuHombre, megaMenuMujer, megaMenuNinos, megaMenuDeportes, megaMenuColecciones, megaMenuOutlet].forEach(m => {
+                        if (m && m.id !== menuId) {
+                            m.classList.remove('mega-menu-visible');
+                            m.classList.add('mega-menu-hidden');
+                        }
+                    });
+                    menu.classList.remove('mega-menu-hidden');
+                    menu.classList.add('mega-menu-visible');
+                });
+                trigger.addEventListener('mouseleave', () => {
+                    timeout = setTimeout(() => {
+                        menu.classList.remove('mega-menu-visible');
+                        menu.classList.add('mega-menu-hidden');
+                    }, 200);
+                });
+                menu.addEventListener('mouseenter', () => {
+                    clearTimeout(timeout);
+                });
+                menu.addEventListener('mouseleave', () => {
+                    timeout = setTimeout(() => {
+                        menu.classList.remove('mega-menu-visible');
+                        menu.classList.add('mega-menu-hidden');
+                    }, 200);
+                });
+            }
+
+            // Setup all mega menus
+            setupMegaMenu('mega-menu-trigger-hombre', 'mega-menu-hombre');
+            setupMegaMenu('mega-menu-trigger-mujer', 'mega-menu-mujer');
+            setupMegaMenu('mega-menu-trigger-ninos', 'mega-menu-ninos');
+            setupMegaMenu('mega-menu-trigger-deportes', 'mega-menu-deportes');
+            setupMegaMenu('mega-menu-trigger-colecciones', 'mega-menu-colecciones'); // New setup
+            setupMegaMenu('mega-menu-trigger-outlet', 'mega-menu-outlet'); // New setup
 
 
             // --- Hero Slider Logic ---
@@ -874,14 +1946,21 @@
             }
 
             function populateFilterOptions() {
-                const uniqueCategories = getUniqueOptions(products, 'category');
-                const uniqueSizes = getUniqueOptions(products, 'sizes');
-                const uniqueColors = getUniqueOptions(products, 'colors');
+                // Filter products based on current gender for category dropdown
+                let productsForCategoryFilter = products;
+                if (currentFilters.gender !== 'Todos') {
+                    productsForCategoryFilter = products.filter(p => p.gender === currentFilters.gender || p.gender === 'Unisex');
+                }
 
-                categoryFilter.innerHTML = uniqueCategories.map(cat => `<option value="${cat}">${cat} (${products.filter(p => cat === 'Todos' || p.category === cat).length})</option>`).join('');
+                const uniqueCategories = getUniqueOptions(productsForCategoryFilter, 'category');
+                const uniqueSizes = getUniqueOptions(products, 'sizes'); // Sizes are generally universal
+                const uniqueColors = getUniqueOptions(products, 'colors'); // Colors are generally universal
+
+                categoryFilter.innerHTML = uniqueCategories.map(cat => `<option value="${cat}">${cat} (${productsForCategoryFilter.filter(p => cat === 'Todos' || p.category === cat).length})</option>`).join('');
                 sizeFilter.innerHTML = uniqueSizes.map(size => `<option value="${size}">${size}</option>`).join('');
                 colorFilter.innerHTML = uniqueColors.map(color => `<option value="${color}">${color}</option>`).join('');
 
+                // Set selected values based on current filters
                 categoryFilter.value = currentFilters.category;
                 sizeFilter.value = currentFilters.size;
                 colorFilter.value = currentFilters.color;
@@ -892,19 +1971,45 @@
             function applyFilters() {
                 let tempProducts = [...products];
 
+                // Apply gender filter first
+                if (currentFilters.gender !== 'Todos') {
+                    tempProducts = tempProducts.filter(product => product.gender === currentFilters.gender || product.gender === 'Unisex');
+                }
+
+                // Apply category filter
                 if (currentFilters.category !== 'Todos') {
                     tempProducts = tempProducts.filter(product => product.category === currentFilters.category);
                 }
+                // Apply size filter
                 if (currentFilters.size !== 'Todos') {
                     tempProducts = tempProducts.filter(product => product.sizes && product.sizes.includes(currentFilters.size));
                 }
+                // Apply color filter
                 if (currentFilters.color !== 'Todos') {
                     tempProducts = tempProducts.filter(product => product.colors && product.colors.includes(currentFilters.color));
                 }
+                // Apply price range filter
                 tempProducts = tempProducts.filter(product => product.price >= currentFilters.minPrice && product.price <= currentFilters.maxPrice);
 
+                // Apply search term filter
+                if (currentFilters.searchTerm) {
+                    const lowerCaseSearchTerm = currentFilters.searchTerm.toLowerCase();
+                    tempProducts = tempProducts.filter(product =>
+                        product.name.toLowerCase().includes(lowerCaseSearchTerm) ||
+                        product.description.toLowerCase().includes(lowerCaseSearchTerm) ||
+                        product.category.toLowerCase().includes(lowerCaseSearchTerm)
+                    );
+                }
+
                 currentFilteredProducts = tempProducts;
-                renderProductGrid();
+
+                // Decide where to render based on if search overlay is open
+                if (searchOverlay.classList.contains('hidden')) {
+                    renderProductGrid(); // Render to main product grid
+                } else {
+                    renderSearchResultsOverlay(currentFilteredProducts); // Render to search overlay
+                }
+
                 // Show/hide "Ver Más" button based on filtered products vs total
                 if (currentFilteredProducts.length < products.length) {
                     loadMoreProductsContainer.classList.remove('hidden');
@@ -941,7 +2046,7 @@
                                 ${generateStars(product.rating)}
                                 <span class="text-sm text-gray-600 ml-1">(${product.rating})</span>
                             </div>
-                            <p class="text-xl font-bold text-red-600">$${product.price.toFixed(2)}</p>
+                            <p class="text-xl font-bold text-red-600">${formatPrice(product.price)}</p>
                         </div>
                     `;
                     productGrid.appendChild(productDiv);
@@ -952,8 +2057,50 @@
                 observeScrollAnimations(); // Re-observe new elements
             }
 
+            // New function to render search results within the overlay
+            function renderSearchResultsOverlay(productsToDisplay) {
+                searchResultsOverlay.innerHTML = ''; // Clear existing results
+
+                if (productsToDisplay.length === 0) {
+                    searchResultsOverlay.innerHTML = '<p class="text-center text-gray-600 col-span-full">No se encontraron productos.</p>';
+                    return;
+                }
+
+                productsToDisplay.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'bg-white rounded-lg shadow-sm overflow-hidden group cursor-pointer transform transition-transform duration-300 hover:scale-105';
+                    productDiv.setAttribute('data-product-id', product.id);
+
+                    productDiv.innerHTML = `
+                        <div class="relative w-full h-40 overflow-hidden">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" loading="lazy" />
+                        </div>
+                        <div class="p-3">
+                            <h4 class="text-md font-semibold truncate">${product.name}</h4>
+                            <p class="text-gray-600 text-xs mb-1">${product.category}</p>
+                            <p class="text-lg font-bold text-red-600">${formatPrice(product.price)}</p>
+                        </div>
+                    `;
+                    searchResultsOverlay.appendChild(productDiv);
+                    // Add click listener to open modal from overlay results
+                    productDiv.addEventListener('click', () => {
+                        openProductModal(product);
+                        closeSearchOverlay(); // Close search overlay when product modal opens
+                    });
+                });
+            }
+
+
             categoryFilter.addEventListener('change', (e) => {
                 currentFilters.category = e.target.value;
+                currentFilters.searchTerm = ''; // Clear search when category changes
+                searchInput.value = ''; // Clear search input
+                clearSearchButton.classList.add('hidden');
+                // If a specific category is selected, clear gender filter unless it's "Todos"
+                if (currentFilters.category !== 'Todos') {
+                    currentFilters.gender = 'Todos';
+                }
+                populateFilterOptions(); // Re-populate to show all categories
                 applyFilters();
             });
             sizeFilter.addEventListener('change', (e) => {
@@ -987,6 +2134,9 @@
                 productModal.selectedSize = product.sizes && product.sizes.length > 0 ? product.sizes[0] : null;
                 productModal.selectedColor = product.colors && product.colors.length > 0 ? product.colors[0] : null;
 
+                const isProductLiked = likedProducts.includes(product.id);
+                const heartIconFill = isProductLiked ? 'fill-red-500' : 'fill-none';
+
                 productModalContent.innerHTML = `
                     <div class="w-full md:w-1/2">
                         <div class="relative mb-4 rounded-lg overflow-hidden">
@@ -996,16 +2146,19 @@
                             ` : ''}
                         </div>
                         <div class="grid grid-cols-4 gap-2">
-                            <img src="${product.altImage}" alt="Producto vista 2" class="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80" loading="lazy" />
-                            <img src="https://placehold.co/100x100/A0A0A0/FFFFFF?text=Img3" alt="Producto vista 3" class="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80" loading="lazy" />
-                            <img src="https://placehold.co/100x100/B0B0B0/FFFFFF?text=Img4" alt="Producto vista 4" class="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80" loading="lazy" />
-                            <img src="https://placehold.co/100x100/C0C0C0/FFFFFF?text=Img5" alt="Producto vista 5" class="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80" loading="lazy" />
+                            <img src="${product.altImage}" alt="Producto vista 2" class="w-full h-20 object-cover rounded-md mb-2" loading="lazy" />
+                            <img src="https://placehold.co/100x100/A0A0A0/FFFFFF?text=Img3" alt="Producto vista 3" class="w-full h-20 object-cover rounded-md mb-2" loading="lazy" />
+                            <img src="https://placehold.co/100x100/B0B0B0/FFFFFF?text=Img4" alt="Producto vista 4" class="w-full h-20 object-cover rounded-md mb-2" loading="lazy" />
+                            <img src="https://placehold.co/100x100/C0C0C0/FFFFFF?text=Img5" alt="Producto vista 5" class="w-full h-20 object-cover rounded-md mb-2" loading="lazy" />
                         </div>
                     </div>
 
                     <div class="w-full md:w-1/2">
                         <h2 class="text-3xl font-bold mb-2">${product.name}</h2>
-                        <p class="text-gray-600 text-lg mb-4">$${product.price.toFixed(2)}</p>
+                        <p class="text-gray-600 text-lg mb-4">
+                            ${product.isOutlet ? `<span class="line-through text-gray-400 mr-2">${formatPrice(product.originalPrice)}</span>` : ''}
+                            <span class="text-xl font-bold text-red-600">${formatPrice(product.price)}</span>
+                        </p>
 
                         <div class="flex items-center mb-4">
                             ${generateStars(product.rating)}
@@ -1043,8 +2196,8 @@
                             <button id="add-to-cart-button" class="flex-1 bg-black text-white px-6 py-3 rounded-full font-bold text-lg hover:bg-red-600 transition-colors duration-300 transform hover:scale-105 shadow-lg">
                                 Añadir al Carrito
                             </button>
-                            <button class="p-3 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Guardar en favoritos">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-700"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                            <button id="toggle-favorite-button" class="p-3 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Guardar en favoritos" data-product-id="${product.id}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ${isProductLiked ? 'fill="currentColor" stroke="currentColor" class="text-red-500"' : 'fill="none" stroke="currentColor"'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-700"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
                             </button>
                         </div>
 
@@ -1070,19 +2223,31 @@
                         <div class="border-t border-gray-200 pt-6 mt-6">
                             <h3 class="text-xl font-bold mb-4">Productos Relacionados</h3>
                             <div class="flex space-x-4 overflow-x-auto pb-4 hide-scrollbar">
-                                ${products.slice(0, 3).map(relatedProduct => `
-                                    <div class="flex-shrink-0 w-40">
-                                        <img src="${relatedProduct.image}" alt="${relatedProduct.name}" class="w-full h-32 object-cover rounded-md mb-2" loading="lazy" />
-                                        <p class="text-sm font-semibold truncate">${relatedProduct.name}</p>
-                                        <p class="text-xs text-gray-600">$${relatedProduct.price.toFixed(2)}</p>
-                                    </div>
-                                `).join('')}
+                                ${product.relatedProducts && product.relatedProducts.length > 0 ?
+                                    product.relatedProducts.map(relatedProductId => {
+                                        const relatedProduct = products.find(p => p.id === relatedProductId);
+                                        if (relatedProduct) {
+                                            return `
+                                                <div class="flex-shrink-0 w-40 cursor-pointer related-product-card" data-product-id="${relatedProduct.id}">
+                                                    <img src="${relatedProduct.image}" alt="${relatedProduct.name}" class="w-full h-32 object-cover rounded-md mb-2" loading="lazy" />
+                                                    <p class="text-sm font-semibold truncate">${relatedProduct.name}</p>
+                                                    <p class="text-xs text-gray-600">${formatPrice(relatedProduct.price)}</p>
+                                                </div>
+                                            `;
+                                        }
+                                        return '';
+                                    }).join('')
+                                    :
+                                    `<p class="text-gray-600">No hay productos relacionados disponibles.</p>`
+                                }
                             </div>
                         </div>
                     </div>
                 `;
                 productModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden'; // Prevent scrolling
+                // Ensure the modal is scrolled to top when opened
+                productModal.querySelector('div').scrollTop = 0;
 
                 // Add listeners for size and color selection in modal
                 document.querySelectorAll('#size-selector .size-option').forEach(button => {
@@ -1105,6 +2270,32 @@
                     const quantity = parseInt(document.getElementById('product-quantity').value);
                     addToCart(productModal.currentProduct, quantity, productModal.selectedSize, productModal.selectedColor);
                     closeProductModal();
+                });
+
+                // Add listener for favorite button in modal
+                document.getElementById('toggle-favorite-button').addEventListener('click', async (e) => {
+                    const productId = parseInt(e.currentTarget.dataset.productId);
+                    await toggleFavoriteProduct(productId);
+                    // Re-render the heart icon state immediately
+                    const heartSvg = e.currentTarget.querySelector('svg');
+                    if (likedProducts.includes(productId)) {
+                        heartSvg.setAttribute('fill', 'currentColor');
+                        heartSvg.classList.add('text-red-500');
+                    } else {
+                        heartSvg.setAttribute('fill', 'none');
+                        heartSvg.classList.remove('text-red-500');
+                    }
+                });
+
+                // Add listeners for related product cards
+                document.querySelectorAll('.related-product-card').forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        const relatedProductId = parseInt(e.currentTarget.dataset.productId);
+                        const relatedProduct = products.find(p => p.id === relatedProductId);
+                        if (relatedProduct) {
+                            openProductModal(relatedProduct); // Open new modal for related product
+                        }
+                    });
                 });
             }
 
@@ -1151,7 +2342,7 @@
 
             function updateCartTotal() {
                 cartTotal = cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
-                cartSubtotal.textContent = `$${cartTotal.toFixed(2)}`;
+                cartSubtotal.textContent = formatPrice(cartTotal);
             }
 
             function renderCart() {
@@ -1168,7 +2359,7 @@
                             <div class="flex-1">
                                 <h4 class="font-semibold">${item.product.name}</h4>
                                 <p class="text-sm text-gray-600">Talla: ${item.selectedSize || 'N/A'}, Color: <span style="background-color:${item.selectedColor}; display:inline-block; width:12px; height:12px; border-radius:50%; border:1px solid #ccc;"></span></p>
-                                <p class="text-sm font-bold text-red-600">$${(item.product.price * item.quantity).toFixed(2)}</p>
+                                <p class="text-sm font-bold text-red-600">${formatPrice(item.product.price * item.quantity)}</p>
                                 <div class="flex items-center mt-2">
                                     <button class="quantity-minus bg-gray-200 text-gray-700 px-2 py-1 rounded-l-md hover:bg-gray-300" data-product-id="${item.product.id}" data-size="${item.selectedSize}" data-color="${item.selectedColor}">-</button>
                                     <input type="number" value="${item.quantity}" min="1" class="quantity-input w-12 text-center border-t border-b border-gray-200 focus:outline-none" data-product-id="${item.product.id}" data-size="${item.selectedSize}" data-color="${item.selectedColor}" />
@@ -1234,6 +2425,178 @@
                 document.body.style.overflow = 'hidden'; // Prevent scrolling
             }
 
+            // --- Favorites Logic (Firebase Firestore) ---
+            async function toggleFavoriteProduct(productId) {
+                if (!isAuthReady || !currentUserId) {
+                    console.warn("Authentication not ready or user not logged in. Cannot save favorites.");
+                    showCustomMessageBox(
+                        "Para guardar productos favoritos, por favor inicia sesión o continúa como invitado. Tus favoritos se guardarán en tu cuenta.",
+                        openUserAccountSidebar // Callback to open user account sidebar after user acknowledges
+                    );
+                    return;
+                }
+
+                const userDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/likedProducts/userFavorites`);
+                let currentLikedProductIds = [];
+
+                try {
+                    const docSnap = await getDoc(userDocRef);
+                    if (docSnap.exists()) {
+                        currentLikedProductIds = docSnap.data().productIds || [];
+                    }
+
+                    if (currentLikedProductIds.includes(productId)) {
+                        // Remove from favorites
+                        currentLikedProductIds = currentLikedProductIds.filter(id => id !== productId);
+                    } else {
+                        // Add to favorites
+                        currentLikedProductIds.push(productId);
+                    }
+
+                    await setDoc(userDocRef, { productIds: currentLikedProductIds });
+                    console.log("Favoritos actualizados en Firestore.");
+                } catch (e) {
+                    console.error("Error toggling favorite: ", e);
+                    showCustomMessageBox("Hubo un error al guardar tu favorito. Por favor, inténtalo de nuevo.");
+                }
+            }
+
+            function setupLikedProductsListener() {
+                if (!isAuthReady || !currentUserId) return;
+
+                const userDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/likedProducts/userFavorites`);
+
+                onSnapshot(userDocRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        likedProducts = docSnap.data().productIds || [];
+                        console.log("Favoritos cargados/actualizados:", likedProducts);
+                    } else {
+                        likedProducts = [];
+                        console.log("No hay favoritos para este usuario.");
+                    }
+                    updateFavoritesCount();
+                    renderFavoritesSidebar();
+                }, (error) => {
+                    console.error("Error listening to favorites:", error);
+                });
+            }
+
+            function renderFavoritesSidebar() {
+                favoritesItemsContainer.innerHTML = '';
+                if (likedProducts.length === 0) {
+                    emptyFavoritesMessage.classList.remove('hidden');
+                } else {
+                    emptyFavoritesMessage.classList.add('hidden');
+                    likedProducts.forEach(productId => {
+                        const product = products.find(p => p.id === productId);
+                        if (product) {
+                            const favoriteItemDiv = document.createElement('div');
+                            favoriteItemDiv.className = 'flex items-center space-x-4 p-2 border rounded-lg cursor-pointer favorite-item-card';
+                            favoriteItemDiv.setAttribute('data-product-id', product.id);
+                            favoriteItemDiv.innerHTML = `
+                                <img src="${product.image}" alt="${product.name}" class="w-20 h-20 object-cover rounded-md" loading="lazy" />
+                                <div class="flex-1">
+                                    <h4 class="font-semibold">${product.name}</h4>
+                                    <p class="text-sm font-bold text-red-600">${formatPrice(product.price)}</p>
+                                    <button class="remove-favorite-item text-red-600 text-sm hover:underline mt-1" data-product-id="${product.id}">Eliminar</button>
+                                </div>
+                            `;
+                            favoritesItemsContainer.appendChild(favoriteItemDiv);
+                        }
+                    });
+
+                    // Add event listeners for removing favorite items
+                    favoritesItemsContainer.querySelectorAll('.remove-favorite-item').forEach(button => {
+                        button.addEventListener('click', (e) => {
+                            e.stopPropagation(); // Prevent opening product modal
+                            const id = parseInt(e.currentTarget.dataset.productId);
+                            toggleFavoriteProduct(id);
+                        });
+                    });
+
+                    // Add event listeners for opening product modal from favorites sidebar
+                    favoritesItemsContainer.querySelectorAll('.favorite-item-card').forEach(card => {
+                        card.addEventListener('click', (e) => {
+                            const productId = parseInt(e.currentTarget.dataset.productId);
+                            const product = products.find(p => p.id === productId);
+                            if (product) {
+                                openProductModal(product);
+                                closeFavoritesSidebar();
+                            }
+                        });
+                    });
+                }
+            }
+
+            favoritesButton.addEventListener('click', () => {
+                openFavoritesSidebar();
+            });
+
+            mobileFavoritesButton.addEventListener('click', () => {
+                closeMobileMenu();
+                openFavoritesSidebar();
+            });
+
+            closeFavoritesSidebar.addEventListener('click', () => {
+                favoritesSidebar.classList.remove('translate-x-0');
+                favoritesSidebar.classList.add('translate-x-full');
+                document.body.style.overflow = 'auto';
+            });
+
+            function openFavoritesSidebar() {
+                favoritesSidebar.classList.remove('translate-x-full');
+                favoritesSidebar.classList.add('translate-x-0');
+                document.body.style.overflow = 'hidden';
+                renderFavoritesSidebar(); // Ensure it's up-to-date
+            }
+
+            // --- User Account Logic ---
+            userAccountButton.addEventListener('click', () => {
+                openUserAccountSidebar();
+            });
+
+            mobileUserAccountButton.addEventListener('click', () => {
+                closeMobileMenu();
+                openUserAccountSidebar();
+            });
+
+            closeUserAccountSidebar.addEventListener('click', () => {
+                userAccountSidebar.classList.remove('translate-x-0');
+                userAccountSidebar.classList.add('translate-x-full');
+                document.body.style.overflow = 'auto';
+            });
+
+            function openUserAccountSidebar() {
+                userAccountSidebar.classList.remove('translate-x-full');
+                userAccountSidebar.classList.add('translate-x-0');
+                document.body.style.overflow = 'hidden';
+                if (currentUserId) {
+                    displayUserId.textContent = currentUserId;
+                } else {
+                    displayUserId.textContent = "No autenticado";
+                }
+            }
+
+            logoutButton.addEventListener('click', async () => {
+                try {
+                    await signOut(auth);
+                    console.log("Usuario ha cerrado sesión.");
+                    currentUserId = null;
+                    isAuthReady = false;
+                    likedProducts = []; // Clear liked products on logout
+                    updateFavoritesCount();
+                    renderFavoritesSidebar();
+                    displayUserId.textContent = "Cerrado sesión";
+                    closeUserAccountSidebar();
+                    // Re-authenticate anonymously after logout
+                    await signInAnonymously(auth);
+                } catch (error) {
+                    console.error("Error al cerrar sesión:", error);
+                    showCustomMessageBox("Hubo un error al cerrar sesión. Por favor, inténtalo de nuevo.");
+                }
+            });
+
+
             // --- Customizer Logic ---
             customizerColorPicker.addEventListener('input', (e) => {
                 const newColor = e.target.value;
@@ -1282,6 +2645,213 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
+            // --- Section Visibility Control ---
+            function hideAllMainSections() {
+                nuestrosProductosSection.classList.add('hidden');
+                collectionsSection.classList.add('hidden');
+                outletSection.classList.add('hidden');
+                heroSection.classList.add('hidden'); // Also hide hero and featured collections
+                featuredCollectionsSection.classList.add('hidden');
+            }
+
+            // --- Mega Menu Link Handling ---
+            function handleMegaMenuLinkClick(event) {
+                event.preventDefault(); // Prevent default link behavior (e.g., hash change in URL)
+
+                const category = event.currentTarget.dataset.category;
+                const gender = event.currentTarget.dataset.gender;
+                const collectionType = event.currentTarget.dataset.collectionType; // New
+                const outletFilter = event.currentTarget.dataset.outletFilter; // New
+
+                // Reset filters for main product grid
+                currentFilters.category = 'Todos';
+                currentFilters.gender = 'Todos';
+                currentFilters.searchTerm = '';
+                searchInput.value = '';
+                clearSearchButton.classList.add('hidden');
+                searchResultsOverlay.innerHTML = '';
+
+                hideAllMainSections(); // Hide all main content sections first
+
+                if (collectionType) {
+                    collectionsSection.classList.remove('hidden');
+                    renderCollectionsSection(collectionType);
+                    collectionsSection.scrollIntoView({ behavior: 'smooth' });
+                } else if (outletFilter) {
+                    outletSection.classList.remove('hidden');
+                    renderOutletSection(outletFilter);
+                    outletSection.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    // Default to main product section
+                    nuestrosProductosSection.classList.remove('hidden');
+                    heroSection.classList.remove('hidden');
+                    featuredCollectionsSection.classList.remove('hidden');
+                    currentFilters.category = category;
+                    currentFilters.gender = gender || 'Todos';
+                    populateFilterOptions();
+                    applyFilters();
+                    nuestrosProductosSection.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                // Close all mega menus
+                [megaMenuHombre, megaMenuMujer, megaMenuNinos, megaMenuDeportes, megaMenuColecciones, megaMenuOutlet].forEach(m => {
+                    if (m) {
+                        m.classList.remove('mega-menu-visible');
+                        m.classList.add('mega-menu-hidden');
+                    }
+                });
+            }
+
+            // Attach event listeners to all mega-menu links
+            document.querySelectorAll('.mega-menu-link').forEach(link => {
+                link.addEventListener('click', handleMegaMenuLinkClick);
+            });
+
+            // --- Search Functionality ---
+            searchButton.addEventListener('click', () => {
+                searchOverlay.classList.remove('hidden');
+                searchInput.focus(); // Focus on the input when overlay opens
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                // Trigger an initial search if there's already text in the input
+                if (searchInput.value) {
+                    currentFilters.searchTerm = searchInput.value;
+                    applyFilters();
+                } else {
+                    searchResultsOverlay.innerHTML = ''; // Clear previous results if input is empty
+                }
+            });
+
+            function closeSearchOverlay() {
+                searchOverlay.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+                searchInput.value = ''; // Clear search input on close
+                clearSearchButton.classList.add('hidden');
+                currentFilters.searchTerm = ''; // Clear search term from filters
+                searchResultsOverlay.innerHTML = ''; // Clear search overlay results
+                applyFilters(); // Re-apply filters to show all products in main grid
+            }
+
+            closeSearchOverlayButton.addEventListener('click', closeSearchOverlay);
+
+            searchInput.addEventListener('input', () => {
+                if (searchInput.value.length > 0) {
+                    clearSearchButton.classList.remove('hidden');
+                } else {
+                    clearSearchButton.classList.add('hidden');
+                }
+                currentFilters.searchTerm = searchInput.value; // Update search term on input
+                applyFilters(); // Apply filters to update results in overlay
+            });
+
+            clearSearchButton.addEventListener('click', () => {
+                searchInput.value = '';
+                clearSearchButton.classList.add('hidden');
+                currentFilters.searchTerm = ''; // Clear search term from filters
+                searchResultsOverlay.innerHTML = ''; // Clear search overlay results
+                applyFilters(); // Re-apply filters to show all products in main grid
+                searchInput.focus();
+            });
+
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    // No need to close overlay or scroll, results are now in overlay
+                    currentFilters.searchTerm = searchInput.value;
+                    applyFilters(); // Re-apply filters to ensure latest results are shown
+                }
+            });
+
+            // --- New Collections Section Rendering ---
+            function renderCollectionsSection(filterType = 'Todos') {
+                collectionsGrid.innerHTML = '';
+                let filteredCollections = collectionsData;
+
+                if (filterType !== 'Todos') {
+                    filteredCollections = collectionsData.filter(collection => collection.status === filterType);
+                }
+
+                if (filteredCollections.length === 0) {
+                    collectionsGrid.innerHTML = '<p class="text-center text-gray-600 col-span-full">No se encontraron colecciones con el filtro seleccionado.</p>';
+                    return;
+                }
+
+                filteredCollections.forEach(collection => {
+                    const collectionCard = document.createElement('div');
+                    collectionCard.className = 'bg-white rounded-lg shadow-md overflow-hidden group animate-on-scroll transform transition-transform duration-300 hover:scale-105';
+                    
+                    let statusBadge = '';
+                    let ctaButton = '';
+
+                    if (collection.status === 'Exclusiva') {
+                        statusBadge = `<span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">Exclusiva</span>`;
+                        ctaButton = `<button class="mt-4 bg-black text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-red-600 transition-colors duration-300">Ver Colección</button>`;
+                    } else if (collection.status === 'Próximamente') {
+                        statusBadge = `<span class="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">Próximamente</span>`;
+                        ctaButton = `<p class="mt-4 text-sm text-gray-700 font-semibold">Lanzamiento: ${collection.launchDate}</p>`;
+                    }
+
+                    collectionCard.innerHTML = `
+                        <div class="relative w-full h-64 overflow-hidden">
+                            <img src="${collection.image}" alt="${collection.name}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" />
+                            ${statusBadge}
+                        </div>
+                        <div class="p-4 text-center">
+                            <h3 class="text-xl font-bold mb-2">${collection.name}</h3>
+                            <p class="text-gray-700 text-sm mb-4">${collection.description}</p>
+                            ${ctaButton}
+                        </div>
+                    `;
+                    collectionsGrid.appendChild(collectionCard);
+                });
+                observeScrollAnimations();
+            }
+
+            // --- New Outlet Section Rendering ---
+            function renderOutletSection(filterCategory = 'Todos') {
+                outletProductGrid.innerHTML = '';
+                noOutletProductsMessage.classList.add('hidden');
+
+                let filteredOutletProducts = products.filter(p => p.isOutlet);
+
+                if (filterCategory !== 'Todos') {
+                    filteredOutletProducts = filteredOutletProducts.filter(p => p.category === filterCategory);
+                }
+
+                if (filteredOutletProducts.length === 0) {
+                    noOutletProductsMessage.classList.remove('hidden');
+                    return;
+                }
+
+                filteredOutletProducts.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'bg-white rounded-lg shadow-md overflow-hidden group cursor-pointer animate-on-scroll transform transition-transform duration-300 hover:scale-105';
+                    productDiv.setAttribute('data-product-id', product.id); // Store ID for modal
+
+                    productDiv.innerHTML = `
+                        <div class="relative w-full h-64 overflow-hidden">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300" loading="lazy" />
+                            <img src="${product.altImage}" alt="${product.name} - Vista Alternativa" class="w-full h-full object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" loading="lazy" />
+                            <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">Oferta</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold mb-1">${product.name}</h3>
+                            <p class="text-gray-600 text-sm mb-2">${product.category}</p>
+                            <div class="flex items-center mb-2">
+                                ${generateStars(product.rating)}
+                                <span class="text-sm text-gray-600 ml-1">(${product.rating})</span>
+                            </div>
+                            <p class="text-xl font-bold text-red-600">
+                                <span class="line-through text-gray-400 mr-2">${formatPrice(product.originalPrice)}</span>
+                                ${formatPrice(product.price)}
+                            </p>
+                        </div>
+                    `;
+                    outletProductGrid.appendChild(productDiv);
+                    productDiv.addEventListener('click', () => openProductModal(product));
+                });
+                observeScrollAnimations();
+            }
+
+
             // --- Initial Renders & Setup ---
             renderHeroSlides();
             renderFeaturedCollections();
@@ -1289,6 +2859,7 @@
             applyFilters(); // Initial render of products
             updateCartCount(); // Set initial cart count
             renderCart(); // Initial render of cart
+            updateFavoritesCount(); // Initial render of favorites count
 
             // Set current year in footer
             currentYearSpan.textContent = new Date().getFullYear();
