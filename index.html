@@ -109,7 +109,7 @@
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 ease-in-out py-4 px-6 md:px-12 flex items-center justify-between">
         <!-- Logo -->
         <div class="flex items-center">
-            <a href="/" class="text-2xl font-bold text-black flex items-center">
+            <a href="#" id="sportia-logo" class="text-2xl font-bold text-black flex items-center">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                     <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                     <path d="M12 7L17 10L12 13L7 10L12 7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
@@ -471,10 +471,25 @@
             </button>
         </div>
         <div class="flex-1 overflow-y-auto p-6 space-y-4">
-            <p class="text-gray-700">Bienvenido/a!</p>
-            <p class="text-gray-700 text-sm break-all">Tu ID de usuario: <span id="display-user-id" class="font-semibold">Cargando...</span></p>
-            <button id="logout-button" class="w-full bg-red-600 text-white py-2 rounded-full font-bold hover:bg-red-700 transition-colors duration-300">Cerrar Sesión</button>
-            <p class="text-sm text-gray-500 mt-4"> (Para fines de demostración, la sesión se maneja de forma simplificada.)</p>
+            <!-- Login Form Container (initially hidden or shown based on auth state) -->
+            <div id="login-form-container" class="space-y-4 hidden">
+                <input type="text" id="login-alias-email" placeholder="Alias o Correo" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+                <input type="password" id="login-password" placeholder="Contraseña" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+                <button id="login-submit-button" class="w-full bg-black text-white py-3 rounded-full font-bold hover:bg-red-600 transition-colors duration-300">
+                    Iniciar Sesión / Registrarse
+                </button>
+                <p class="text-xs text-gray-500 text-center">
+                    (Esta es una simulación. Las credenciales no se almacenan de forma segura en el navegador.)
+                </p>
+            </div>
+            <!-- Logged In Info Container (initially shown or hidden based on auth state) -->
+            <div id="logged-in-info" class="space-y-4">
+                <p class="text-gray-700">Bienvenido/a!</p>
+                <p class="text-gray-700 text-sm break-all">Tu ID de usuario: <span id="display-user-id" class="font-semibold">Cargando...</span></p>
+                <p class="text-gray-700 text-sm break-all hidden" id="display-user-alias">Alias: <span class="font-semibold"></span></p>
+                <button id="logout-button" class="w-full bg-red-600 text-white py-2 rounded-full font-bold hover:bg-red-700 transition-colors duration-300">Cerrar Sesión</button>
+                <p class="text-sm text-gray-500 mt-4"> (Para fines de demostración, la sesión se maneja de forma simplificada.)</p>
+            </div>
         </div>
     </div>
 
@@ -551,9 +566,9 @@
                     <div class="mb-6">
                         <label for="min-price" class="block text-sm font-medium text-gray-700 mb-2">Precio</label>
                         <div class="flex items-center space-x-2">
-                            <input type="number" id="min-price" value="0" min="0" class="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500 text-sm" />
+                            <input type="number" id="min-price" value="0" min="0" class="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm" />
                             <span>-</span>
-                            <input type="number" id="max-price" value="2000000" min="0" class="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500 text-sm" />
+                            <input type="number" id="max-price" value="2000000" min="0" class="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm" />
                         </div>
                     </div>
 
@@ -634,7 +649,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" x2="15" y1="20" y2="20"></line><line x1="12" x2="12" y1="4" y2="20"></line></svg>
                             Texto / Insignia
                         </label>
-                        <input type="text" id="text-input" value="TU LOGO" maxlength="15" placeholder="Escribe tu texto" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500" />
+                        <input type="text" id="text-input" value="TU LOGO" maxlength="15" placeholder="Escribe tu texto" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
                     </div>
                     <button id="save-customization" class="w-full bg-black text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-red-600 transition-colors duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>
@@ -797,6 +812,7 @@
             let db;
             let auth;
             let currentUserId = null;
+            let currentUserName = null; // To store alias/email if logged in via form
             let isAuthReady = false;
 
             try {
@@ -804,24 +820,30 @@
                 db = getFirestore(app);
                 auth = getAuth(app);
 
+                // Listen for Firebase authentication state changes
                 onAuthStateChanged(auth, async (user) => {
                     if (user) {
                         currentUserId = user.uid;
-                        console.log("Usuario autenticado:", currentUserId);
-                        document.getElementById('display-user-id').textContent = currentUserId;
+                        console.log("Usuario autenticado (Firebase UID):", currentUserId);
                         isAuthReady = true;
-                        // Fetch liked products after auth is ready
-                        setupLikedProductsListener();
+                        // Fetch user profile (alias) and liked products after auth is ready
+                        await fetchUserProfile(); // Fetch user's alias from Firestore
+                        setupLikedProductsListener(); // Start listening for favorite products
+                        updateUserAccountSidebarDisplay(); // Update UI based on authentication state
                     } else {
                         console.log("Usuario no autenticado. Iniciando sesión anónimamente...");
                         try {
+                            // Attempt to sign in anonymously or with a custom token if provided
                             if (initialAuthToken) {
                                 await signInWithCustomToken(auth, initialAuthToken);
                             } else {
                                 await signInAnonymously(auth);
                             }
                         } catch (error) {
-                            console.error("Error al iniciar sesión:", error);
+                            console.error("Error al iniciar sesión anónima:", error);
+                            // Fallback if anonymous sign-in also fails
+                            displayUserId.textContent = "Error de autenticación.";
+                            updateUserAccountSidebarDisplay();
                         }
                     }
                 });
@@ -1653,6 +1675,7 @@
             const saveCustomizationBtn = document.getElementById('save-customization');
             const backToTopBtn = document.getElementById('back-to-top');
             const currentYearSpan = document.getElementById('current-year');
+            const sportiaLogo = document.getElementById('sportia-logo'); // Get the Sportia logo element
 
             // Search elements
             const searchButton = document.getElementById('search-button');
@@ -1686,6 +1709,12 @@
             const closeUserAccountSidebar = document.getElementById('close-user-account-sidebar');
             const logoutButton = document.getElementById('logout-button');
             const displayUserId = document.getElementById('display-user-id');
+            const displayUserAlias = document.getElementById('display-user-alias'); // New: Element to display user alias
+            const loginFormContainer = document.getElementById('login-form-container'); // New: Container for login form
+            const loggedInInfo = document.getElementById('logged-in-info'); // New: Container for logged-in user info
+            const loginAliasEmailInput = document.getElementById('login-alias-email'); // New: Input for alias/email
+            const loginPasswordInput = document.getElementById('login-password'); // New: Input for password
+            const loginSubmitButton = document.getElementById('login-submit-button'); // New: Login/Register button
 
             // Custom Message Box elements
             const customMessageBox = document.getElementById('custom-message-box');
@@ -1739,6 +1768,11 @@
             }
 
             // --- Custom Message Box Functions ---
+            /**
+             * Displays a custom message box with a given message and an optional callback.
+             * @param {string} message - The message to display.
+             * @param {function} [callback=null] - An optional function to execute when the OK button is clicked.
+             */
             function showCustomMessageBox(message, callback = null) {
                 customMessageBoxText.textContent = message;
                 customMessageBox.classList.remove('hidden');
@@ -1747,9 +1781,9 @@
                 const handleOkClick = () => {
                     customMessageBox.classList.add('hidden');
                     document.body.style.overflow = 'auto'; // Restore scrolling
-                    customMessageBoxOkButton.removeEventListener('click', handleOkClick); // Clean up
+                    customMessageBoxOkButton.removeEventListener('click', handleOkClick); // Clean up event listener
                     if (callback) {
-                        callback();
+                        callback(); // Execute the callback function
                     }
                 };
                 customMessageBoxOkButton.addEventListener('click', handleOkClick);
@@ -2427,11 +2461,12 @@
 
             // --- Favorites Logic (Firebase Firestore) ---
             async function toggleFavoriteProduct(productId) {
-                if (!isAuthReady || !currentUserId) {
+                // If user is not authenticated or auth is not ready, prompt for login
+                if (!isAuthReady || !currentUserId || !currentUserName) { // Check for currentUserName to indicate "logged in" state for favorites
                     console.warn("Authentication not ready or user not logged in. Cannot save favorites.");
                     showCustomMessageBox(
-                        "Para guardar productos favoritos, por favor inicia sesión o continúa como invitado. Tus favoritos se guardarán en tu cuenta.",
-                        openUserAccountSidebar // Callback to open user account sidebar after user acknowledges
+                        "Para guardar productos favoritos, por favor inicia sesión o crea una cuenta. Tus favoritos se guardarán en tu perfil.",
+                        openUserAccountSidebarAndShowLoginForm // Callback to open user account sidebar and show login form
                     );
                     return;
                 }
@@ -2448,9 +2483,11 @@
                     if (currentLikedProductIds.includes(productId)) {
                         // Remove from favorites
                         currentLikedProductIds = currentLikedProductIds.filter(id => id !== productId);
+                        showCustomMessageBox("Producto eliminado de favoritos.");
                     } else {
                         // Add to favorites
                         currentLikedProductIds.push(productId);
+                        showCustomMessageBox("Producto añadido a favoritos.");
                     }
 
                     await setDoc(userDocRef, { productIds: currentLikedProductIds });
@@ -2461,26 +2498,29 @@
                 }
             }
 
+            // Sets up a real-time listener for the user's liked products in Firestore
             function setupLikedProductsListener() {
-                if (!isAuthReady || !currentUserId) return;
+                if (!isAuthReady || !currentUserId) return; // Ensure Firebase is ready and user is authenticated
 
                 const userDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/likedProducts/userFavorites`);
 
+                // Listen for real-time updates to the user's liked products document
                 onSnapshot(userDocRef, (docSnap) => {
                     if (docSnap.exists()) {
-                        likedProducts = docSnap.data().productIds || [];
+                        likedProducts = docSnap.data().productIds || []; // Update local likedProducts array
                         console.log("Favoritos cargados/actualizados:", likedProducts);
                     } else {
-                        likedProducts = [];
+                        likedProducts = []; // If document doesn't exist, no favorites yet
                         console.log("No hay favoritos para este usuario.");
                     }
-                    updateFavoritesCount();
-                    renderFavoritesSidebar();
+                    updateFavoritesCount(); // Update the UI count
+                    renderFavoritesSidebar(); // Re-render the favorites sidebar
                 }, (error) => {
                     console.error("Error listening to favorites:", error);
                 });
             }
 
+            // Renders the list of favorite products in the favorites sidebar
             function renderFavoritesSidebar() {
                 favoritesItemsContainer.innerHTML = '';
                 if (likedProducts.length === 0) {
@@ -2508,9 +2548,9 @@
                     // Add event listeners for removing favorite items
                     favoritesItemsContainer.querySelectorAll('.remove-favorite-item').forEach(button => {
                         button.addEventListener('click', (e) => {
-                            e.stopPropagation(); // Prevent opening product modal
+                            e.stopPropagation(); // Prevent opening product modal when clicking remove
                             const id = parseInt(e.currentTarget.dataset.productId);
-                            toggleFavoriteProduct(id);
+                            toggleFavoriteProduct(id); // Use toggle to remove
                         });
                     });
 
@@ -2551,6 +2591,65 @@
             }
 
             // --- User Account Logic ---
+
+            // Fetches the user's alias from Firestore
+            async function fetchUserProfile() {
+                if (!currentUserId) {
+                    currentUserName = null;
+                    return;
+                }
+                const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/profile/userProfile`);
+                try {
+                    const docSnap = await getDoc(userProfileRef);
+                    if (docSnap.exists() && docSnap.data().alias) {
+                        currentUserName = docSnap.data().alias;
+                        displayUserAlias.querySelector('span').textContent = currentUserName;
+                        displayUserAlias.classList.remove('hidden');
+                    } else {
+                        currentUserName = null;
+                        displayUserAlias.classList.add('hidden');
+                    }
+                } catch (error) {
+                    console.error("Error fetching user profile:", error);
+                    currentUserName = null;
+                    displayUserAlias.classList.add('hidden');
+                }
+            }
+
+            // Updates the display of the user account sidebar based on authentication and alias status
+            function updateUserAccountSidebarDisplay() {
+                if (currentUserId && currentUserName) { // User is "logged in" with an alias
+                    loggedInInfo.classList.remove('hidden');
+                    loginFormContainer.classList.add('hidden');
+                    displayUserId.textContent = currentUserId;
+                    displayUserAlias.querySelector('span').textContent = currentUserName;
+                    displayUserAlias.classList.remove('hidden');
+                } else { // User is anonymous or has no alias set
+                    loggedInInfo.classList.add('hidden');
+                    loginFormContainer.classList.remove('hidden');
+                    displayUserId.textContent = currentUserId || "No autenticado"; // Show UID even if no alias
+                    displayUserAlias.classList.add('hidden');
+                }
+            }
+
+            // Opens the user account sidebar, specifically showing the login form
+            function openUserAccountSidebarAndShowLoginForm() {
+                userAccountSidebar.classList.remove('translate-x-full');
+                userAccountSidebar.classList.add('translate-x-0');
+                document.body.style.overflow = 'hidden';
+                loggedInInfo.classList.add('hidden'); // Hide logged in info
+                loginFormContainer.classList.remove('hidden'); // Show login form
+                loginAliasEmailInput.focus(); // Focus on the first input field
+            }
+
+            // Opens the user account sidebar, showing the appropriate state (logged in or login form)
+            function openUserAccountSidebar() {
+                userAccountSidebar.classList.remove('translate-x-full');
+                userAccountSidebar.classList.add('translate-x-0');
+                document.body.style.overflow = 'hidden';
+                updateUserAccountSidebarDisplay(); // Update UI to show correct state
+            }
+
             userAccountButton.addEventListener('click', () => {
                 openUserAccountSidebar();
             });
@@ -2566,29 +2665,60 @@
                 document.body.style.overflow = 'auto';
             });
 
-            function openUserAccountSidebar() {
-                userAccountSidebar.classList.remove('translate-x-full');
-                userAccountSidebar.classList.add('translate-x-0');
-                document.body.style.overflow = 'hidden';
-                if (currentUserId) {
-                    displayUserId.textContent = currentUserId;
-                } else {
-                    displayUserId.textContent = "No autenticado";
-                }
-            }
+            // Handles the submission of the login/register form
+            loginSubmitButton.addEventListener('click', async () => {
+                const aliasOrEmail = loginAliasEmailInput.value.trim();
+                const password = loginPasswordInput.value;
 
+                if (!aliasOrEmail || !password) {
+                    showCustomMessageBox("Por favor, ingresa tu alias/correo y contraseña.");
+                    return;
+                }
+
+                // --- SIMULACIÓN DE GUARDADO DE CREDENCIALES EN ARCHIVO LOCAL ---
+                // ADVERTENCIA DE SEGURIDAD: JavaScript en el navegador NO PUEDE escribir directamente
+                // archivos en el sistema de archivos local del usuario (como "Infoleoon.txt")
+                // por razones de seguridad. Esto es una simulación para propósitos de demostración.
+                // En una aplicación real, las credenciales se enviarían a un SERVIDOR SEGURO
+                // donde se almacenarían de forma encriptada en una base de datos.
+                console.log("--- SIMULACIÓN DE GUARDADO DE CREDENCIALES ---");
+                console.log(`Alias/Correo: ${aliasOrEmail}`);
+                console.log(`Contraseña: ${password}`); // ¡NUNCA almacenar contraseñas en texto plano en una aplicación real!
+                console.log("---------------------------------------------");
+                showCustomMessageBox("¡Inicio de sesión/registro simulado exitoso! Tus credenciales se han 'guardado' en la consola del navegador. En una aplicación real, esto se manejaría de forma segura en un servidor y una base de datos.", () => {
+                    // After message, proceed with saving alias to Firestore and updating UI
+                    closeUserAccountSidebar(); // Close sidebar after user acknowledges
+                });
+
+                // Save the alias to Firestore for the current anonymous user
+                // This associates a display name with the Firebase UID
+                const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/profile/userProfile`);
+                try {
+                    await setDoc(userProfileRef, { alias: aliasOrEmail }, { merge: true }); // Use merge to avoid overwriting other fields
+                    currentUserName = aliasOrEmail; // Update local state
+                    console.log("Alias guardado en Firestore para el usuario:", currentUserId);
+                    updateUserAccountSidebarDisplay(); // Update UI to show alias and logged-in state
+                } catch (error) {
+                    console.error("Error saving user alias to Firestore:", error);
+                    showCustomMessageBox("Hubo un error al guardar tu alias. Por favor, inténtalo de nuevo.");
+                }
+            });
+
+            // Handles user logout
             logoutButton.addEventListener('click', async () => {
                 try {
+                    // Sign out the current Firebase user (anonymous or otherwise)
                     await signOut(auth);
                     console.log("Usuario ha cerrado sesión.");
                     currentUserId = null;
+                    currentUserName = null; // Clear stored alias
                     isAuthReady = false;
                     likedProducts = []; // Clear liked products on logout
-                    updateFavoritesCount();
-                    renderFavoritesSidebar();
-                    displayUserId.textContent = "Cerrado sesión";
+                    updateFavoritesCount(); // Update favorites count UI
+                    renderFavoritesSidebar(); // Clear favorites sidebar content
+                    updateUserAccountSidebarDisplay(); // Show login form
                     closeUserAccountSidebar();
-                    // Re-authenticate anonymously after logout
+                    // Re-authenticate anonymously after logout to ensure Firestore listeners can still function
                     await signInAnonymously(auth);
                 } catch (error) {
                     console.error("Error al cerrar sesión:", error);
@@ -2654,6 +2784,22 @@
                 featuredCollectionsSection.classList.add('hidden');
             }
 
+            function showHomeSections() {
+                heroSection.classList.remove('hidden');
+                featuredCollectionsSection.classList.remove('hidden');
+                nuestrosProductosSection.classList.remove('hidden');
+                // Reset filters to show all products on home
+                currentFilters.category = 'Todos';
+                currentFilters.gender = 'Todos';
+                currentFilters.searchTerm = '';
+                searchInput.value = '';
+                clearSearchButton.classList.add('hidden');
+                searchResultsOverlay.innerHTML = '';
+                populateFilterOptions();
+                applyFilters();
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+            }
+
             // --- Mega Menu Link Handling ---
             function handleMegaMenuLinkClick(event) {
                 event.preventDefault(); // Prevent default link behavior (e.g., hash change in URL)
@@ -2706,6 +2852,14 @@
             document.querySelectorAll('.mega-menu-link').forEach(link => {
                 link.addEventListener('click', handleMegaMenuLinkClick);
             });
+
+            // --- Sportia Logo Home Redirection ---
+            sportiaLogo.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                hideAllMainSections();
+                showHomeSections();
+            });
+
 
             // --- Search Functionality ---
             searchButton.addEventListener('click', () => {
@@ -2860,6 +3014,7 @@
             updateCartCount(); // Set initial cart count
             renderCart(); // Initial render of cart
             updateFavoritesCount(); // Initial render of favorites count
+            updateUserAccountSidebarDisplay(); // Initial update of user account sidebar display
 
             // Set current year in footer
             currentYearSpan.textContent = new Date().getFullYear();
