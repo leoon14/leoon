@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORTIA - Tienda Deportiva Premium</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Define custom keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Apply animations to corresponding classes */
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .animate-fade-in-up {
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+        .animate-slide-in-right {
+            animation: slideInRight 0.3s ease-out forwards;
+        }
+
+        /* Custom scrollbar for related products */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        /* Basic parallax effect for hero images (more advanced JS needed for true parallax) */
+        .parallax-bg {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        /* Ensure smooth transitions for all elements */
+        * {
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* Font family for Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Mega Menu specific transition for better visual */
+        .mega-menu-transition {
+            transform-origin: top;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .mega-menu-hidden {
+            transform: translateY(-10px) scaleY(0.95);
+            opacity: 0;
+            pointer-events: none; /* Disable interaction when hidden */
+        }
+        .mega-menu-visible {
+            transform: translateY(0) scaleY(1);
+            opacity: 1;
+            pointer-events: auto; /* Enable interaction when visible */
+        }
+    </style>
+</head>
+<body class="font-inter antialiased text-gray-800 bg-white">
+
+    <!-- Header -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 ease-in-out py-4 px-6 md:px-12 flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center">
+            <a href="/" class="text-2xl font-bold text-black flex items-center">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
+                    <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M12 7L17 10L12 13L7 10L12 7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M7 10V17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M17 10V17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M12 13V22" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                SPORTIA
+            </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden lg:flex items-center space-x-8">
+            <div class="relative group">
+                <button id="mega-menu-trigger" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">
+                    Hombre
+                </button>
+                <div id="mega-menu" class="absolute left-1/2 -translate-x-1/2 mt-0 w-[900px] bg-white shadow-xl rounded-b-lg p-8 grid grid-cols-3 gap-8 mega-menu-transition mega-menu-hidden">
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Calzado</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="hover:text-red-600">Running</a></li>
+                            <li><a href="#" class="hover:text-red-600">Basketball</a></li>
+                            <li><a href="#" class="hover:text-red-600">Fútbol</a></li>
+                            <li><a href="#" class="hover:text-red-600">Entrenamiento</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">Ropa</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="hover:text-red-600">Camisetas</a></li>
+                            <li><a href="#" class="hover:text-red-600">Pantalones</a></li>
+                            <li><a href="#" class="hover:text-red-600">Chaquetas</a></li>
+                            <li><a href="#" class="hover:text-red-600">Sudaderas</a></li>
+                        </ul>
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden">
+                        <img src="https://placehold.co/300x200/F0F0F0/333333?text=MegaMenu+Hombre" alt="Hombre Destacado" class="w-full h-full object-cover" loading="lazy" />
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                            <p class="text-white text-xl font-bold">Nueva Colección</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Mujer</a>
+            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Niños</a>
+            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Deportes</a>
+            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Colecciones</a>
+            <a href="#" class="py-2 px-3 text-sm font-medium hover:text-red-600 transition-colors duration-200">Outlet</a>
+        </nav>
+
+        <!-- Icons -->
+        <div class="flex items-center space-x-4">
+            <button class="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Buscar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            </button>
+            <button class="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 hidden md:block" aria-label="Usuario">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </button>
+            <button class="relative p-2 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Carrito de compras">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span id="cart-item-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">3</span>
+            </button>
+            <button id="mobile-menu-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 lg:hidden" aria-label="Abrir menú móvil">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (Overlay) -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 flex flex-col pt-20 px-6 lg:hidden hidden">
+        <button id="close-mobile-menu" class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100" aria-label="Cerrar menú móvil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+        <nav class="flex flex-col space-y-4 text-lg font-medium">
+            <a href="#" class="py-2 hover:text-red-600">Hombre</a>
+            <a href="#" class="py-2 hover:text-red-600">Mujer</a>
+            <a href="#" class="py-2 hover:text-red-600">Niños</a>
+            <a href="#" class="py-2 hover:text-red-600">Deportes</a>
+            <a href="#" class="py-2 hover:text-red-600">Colecciones</a>
+            <a href="#" class="py-2 hover:text-red-600">Outlet</a>
+            <button class="flex items-center py-2 hover:text-red-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Mi Cuenta
+            </button>
+        </nav>
+    </div>
+
+    <main class="mt-20">
+        <!-- Hero Principal -->
+        <section class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
+            <div id="hero-slider-container" class="absolute inset-0 flex transition-transform duration-700 ease-in-out">
+                <!-- Slides will be injected here by JavaScript -->
+            </div>
+
+            <!-- Slider Navigation -->
+            <button id="hero-prev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 p-3 rounded-full shadow-lg hover:bg-white transition-colors duration-200" aria-label="Anterior slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-800"><path d="m15 18-6-6 6-6"></path></svg>
+            </button>
+            <button id="hero-next" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 p-3 rounded-full shadow-lg hover:bg-white transition-colors duration-200" aria-label="Siguiente slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-800"><path d="m9 18 6-6-6-6"></path></svg>
+            </button>
+
+            <!-- Slider Indicators -->
+            <div id="hero-indicators" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
+                <!-- Indicators will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Sección de colecciones destacadas -->
+        <section class="py-16 px-6 md:px-12 bg-gray-50">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Explora Nuestras Colecciones</h2>
+            <div id="featured-collections-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Collections will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Catálogo/product listing -->
+        <section class="py-16 px-6 md:px-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Nuestros Productos</h2>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Filtros Laterales -->
+                <aside class="w-full lg:w-1/4 p-6 bg-gray-50 rounded-lg shadow-md animate-on-scroll">
+                    <h3 class="text-xl font-bold mb-6">Filtros</h3>
+
+                    <div class="mb-6">
+                        <label for="category-filter" class="block text-sm font-medium text-gray-700 mb-2">Categoría</label>
+                        <select id="category-filter" name="category" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md">
+                            <!-- Options will be injected by JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="size-filter" class="block text-sm font-medium text-gray-700 mb-2">Talla</label>
+                        <select id="size-filter" name="size" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md">
+                            <!-- Options will be injected by JavaScript -->
+                        </select>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="color-filter" class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                        <select id="color-filter" name="color" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md">
+                            <!-- Options will be injected by JavaScript -->
+                        </select>
+                    </div>
+
+                    <!-- Add more filters here (Price, Sport) -->
+                </aside>
+
+                <!-- Product Grid -->
+                <div class="w-full lg:w-3/4">
+                    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <!-- Products will be injected here by JavaScript -->
+                    </div>
+
+                    <!-- Paginación infinita o “ver más” -->
+                    <div id="load-more-products-container" class="text-center mt-12 hidden">
+                        <button id="load-more-products" class="bg-black text-white px-8 py-3 rounded-full font-bold hover:bg-red-600 transition-colors duration-300 transform hover:scale-105 shadow-lg">
+                            Ver Más Productos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Páginas de producto (Modal) -->
+        <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4 hidden animate-fade-in">
+            <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full h-[90vh] overflow-y-auto relative p-6 md:p-8">
+                <button id="close-product-modal" class="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200" aria-label="Cerrar detalles del producto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-700"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                </button>
+
+                <div id="product-modal-content" class="flex flex-col md:flex-row gap-8">
+                    <!-- Product details will be injected here by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Personalizador/interactivo -->
+        <section class="py-16 px-6 md:px-12 bg-gray-100">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Diseña el Tuyo</h2>
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8 flex flex-col md:flex-row items-center gap-8">
+                <!-- Vista 3D interactiva (simulada) -->
+                <div class="w-full md:w-1/2 relative bg-gray-200 rounded-lg flex items-center justify-center p-8 h-80 overflow-hidden">
+                    <img src="https://placehold.co/300x300/E0E0E0/333333?text=Tu+Diseño" alt="Producto personalizable" class="w-full h-full object-contain" loading="lazy" />
+                    <div id="customizer-text-display" class="absolute inset-0 flex items-center justify-center text-center font-bold text-2xl" style="color: #0000FF;">TU LOGO</div>
+                    <div id="customizer-color-overlay" class="absolute inset-0" style="background-color: #0000FF; opacity: 0.3; mix-blend-mode: multiply;"></div>
+                </div>
+
+                <!-- Controles del Personalizador -->
+                <div class="w-full md:w-1/2 space-y-6">
+                    <div>
+                        <label for="color-picker" class="block text-lg font-semibold mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2"><path d="M12.23 20.81a2.4 2.4 0 0 0 3.34 0l1.79-1.79a2.4 2.4 0 0 0 0-3.34L10.92 5.2a2.4 2.4 0 0 0-3.34 0l-1.79 1.79a2.4 2.4 0 0 0 0 3.34Z"></path><path d="m5.2 10.92 8.68 8.68a2.4 2.4 0 0 0 3.34 0l1.79-1.79a2.4 2.4 0 0 0 0-3.34L8.54 5.2a2.4 2.4 0 0 0-3.34 0l-1.79 1.79a2.4 2.4 0 0 0 0 3.34Z"></path><circle cx="12" cy="12" r="10"></circle><path d="M12 2v20"></path><path d="M2 12h20"></path><path d="M18.3 6.3 6.3 18.3"></path><path d="M6.3 6.3 18.3 18.3"></path></svg>
+                            Color Principal
+                        </label>
+                        <input type="color" id="color-picker" value="#0000FF" class="w-full h-12 rounded-md border border-gray-300 cursor-pointer" />
+                    </div>
+                    <div>
+                        <label for="text-input" class="block text-lg font-semibold mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" x2="15" y1="20" y2="20"></line><line x1="12" x2="12" y1="4" y2="20"></line></svg>
+                            Texto / Insignia
+                        </label>
+                        <input type="text" id="text-input" value="TU LOGO" maxlength="15" placeholder="Escribe tu texto" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500" />
+                    </div>
+                    <button id="save-customization" class="w-full bg-black text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-red-600 transition-colors duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>
+                        Guardar Diseño
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección promo + contenido emocional -->
+        <section class="py-16 px-6 md:px-12">
+            <!-- Banner 1 -->
+            <div class="relative w-full h-96 rounded-lg overflow-hidden mb-12 animate-on-scroll">
+                <img src="https://placehold.co/1920x400/000000/FFFFFF?text=Tu+Límite+es+el+Cielo" alt="Banner Motivacional" class="w-full h-full object-cover parallax-bg" loading="lazy" />
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-center p-4">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg">
+                        Tu Límite es el Cielo
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Texto y Cita Motivacional -->
+            <div class="max-w-3xl mx-auto text-center mb-12 animate-on-scroll">
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                    En Sportia, creemos que el deporte es más que una actividad; es una forma de vida. Es la pasión que te impulsa a superar tus límites, la disciplina que forja tu carácter y la comunidad que te apoya en cada paso. Nos dedicamos a equiparte con lo mejor para que cada entrenamiento, cada partido y cada carrera te acerque a tu mejor versión.
+                </p>
+                <blockquote class="text-xl italic font-semibold text-gray-800 border-l-4 border-red-600 pl-4 py-2">
+                    "El éxito no es final, el fracaso no es fatal: es el coraje de continuar lo que cuenta."
+                    <footer class="text-sm mt-2 text-gray-600">- Winston Churchill</footer>
+                </blockquote>
+            </div>
+
+            <!-- Testimonios -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md animate-on-scroll">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/60x60/D0D0D0/333333?text=JP" alt="Foto de Juan Pérez" class="w-16 h-16 rounded-full object-cover mr-4" loading="lazy" />
+                        <div>
+                            <p class="font-bold text-lg">Juan Pérez</p>
+                            <p class="text-sm text-gray-600">Corredor Aficionado</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "Las zapatillas de running de Sportia cambiaron mi forma de entrenar. Son increíblemente cómodas y me dan el soporte que necesito para mis largas distancias. ¡Totalmente recomendadas!"
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md animate-on-scroll">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/60x60/D0D0D0/333333?text=MG" alt="Foto de María Gómez" class="w-16 h-16 rounded-full object-cover mr-4" loading="lazy" />
+                        <div>
+                            <p class="font-bold text-lg">María Gómez</p>
+                            <p class="text-sm text-gray-600">Entrenadora Personal</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "La calidad de la ropa deportiva de Sportia es excepcional. Resiste mis entrenamientos más duros y siempre me siento cómoda y con estilo. Mis clientes también las adoran."
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-6 md:px-12 mt-16">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <!-- Columna 1: Ayuda -->
+            <div>
+                <h3 class="font-bold text-lg mb-4">Ayuda</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-red-600">Estado del Pedido</a></li>
+                    <li><a href="#" class="hover:text-red-600">Envíos y Entregas</a></li>
+                    <li><a href="#" class="hover:text-red-600">Devoluciones</a></li>
+                    <li><a href="#" class="hover:text-red-600">Opciones de Pago</a></li>
+                    <li><a href="#" class="hover:text-red-600">Contáctanos</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 2: Información -->
+            <div>
+                <h3 class="font-bold text-lg mb-4">Información</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-red-600">Acerca de Sportia</a></li>
+                    <li><a href="#" class="hover:text-red-600">Noticias</a></li>
+                    <li><a href="#" class="hover:text-red-600">Trabaja con Nosotros</a></li>
+                    <li><a href="#" class="hover:text-red-600">Inversionistas</a></li>
+                    <li><a href="#" class="hover:text-red-600">Sostenibilidad</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Redes Sociales -->
+            <div>
+                <h3 class="font-bold text-lg mb-4">Síguenos</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-red-600 transition-colors duration-200" aria-label="Facebook">
+                        <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 2.04C6.51 2.04 2.04 6.51 2.04 12C2.04 17.02 5.76 21.14 10.64 21.96V14.28H7.72V11.28H10.64V8.96C10.64 6.04 12.38 4.48 15.02 4.48C16.3 4.48 17.44 4.58 17.84 4.64V7.44H16.2C14.78 7.44 14.5 8.28 14.5 9.28V11.28H17.7L17.2 14.28H14.5V21.96C19.38 21.14 23.1 17.02 23.1 12C23.1 6.51 18.63 2.04 13.14 2.04H12Z"/></svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-red-600 transition-colors duration-200" aria-label="Instagram">
+                        <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.25.06 1.95.21 2.38.37.6.19 1.05.42 1.5.87.45.45.68.9.87 1.5.16.43.31 1.13.37 2.38.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.06 1.25-.21 1.95-.37 2.38-.19.6-.42 1.05-.87 1.5-.45.45-.9.68-1.5.87-.43.16-1.13.31-2.38.37-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.25-.06-1.95-.21-2.38-.37-.6-.19-1.05-.42-1.5-.87-.45-.45-.68-.9-.87-1.5-.16-.43-.31-1.13-.37-2.38-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.06-1.25.21-1.95.37-2.38.19-.6.42-1.05.87-1.5.45-.45.9-.68 1.5-.87.43-.16 1.13-.31 2.38-.37 1.27-.06 1.65-.07 4.85-.07zm0-2.16c-3.25 0-3.67.01-4.94.07-1.3.06-2.1.23-2.67.45-.64.24-1.16.59-1.69 1.12-.53.53-.88 1.05-1.12 1.69-.22.57-.39 1.37-.45 2.67-.06 1.27-.07 1.69-.07 4.94s.01 3.67.07 4.94c.06 1.3.23 2.1.45 2.67.24.64.59 1.16 1.12 1.69.53.53 1.05.88 1.69 1.12.57.22 1.37.39 2.67.45 1.27.06 1.69.07 4.94.07s3.67-.01 4.94-.07c1.3-.06 2.1-.23 2.67-.45.64-.24 1.16-.59 1.69-1.12.53-.53.88-1.05 1.12-1.69.22-.57.39-1.37.45-2.67.06-1.27.07-1.69.07-4.94s-.01-3.67-.07-4.94c-.06-1.3-.23-2.1-.45-2.67-.24-.64-.59-1.16-1.12-1.69-.53-.53-1.05-.88-1.69-1.12-.57-.22-1.37-.39-2.67-.45-1.27-.06-1.69-.07-4.94-.07zm0 5.81c-3.41 0-6.19 2.78-6.19 6.19s2.78 6.19 6.19 6.19 6.19-2.78 6.19-6.19-2.78-6.19-6.19-6.19zm0 10.19c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm6.4-11.23c-.76 0-1.38.62-1.38 1.38s.62 1.38 1.38 1.38 1.38-.62 1.38-1.38-.62-1.38-1.38-1.38z"/></svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-red-600 transition-colors duration-200" aria-label="Twitter">
+                        <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.37-.83.49-1.74.84-2.7.1-.82-.82-2.07-1.33-3.44-1.33-2.6 0-4.7 2.1-4.7 4.7 0 .37.04.73.11 1.08-3.91-.2-7.37-2.07-9.7-4.9-.4.69-.63 1.49-.63 2.37 0 1.63.83 3.06 2.09 3.9-.77-.02-1.49-.23-2.13-.59v.06c0 2.28 1.62 4.18 3.77 4.6-.39.1-.8.15-1.22.15-.3 0-.59-.03-.87-.08.6 1.87 2.34 3.23 4.4 3.27-1.61 1.26-3.64 2.02-5.83 2.02-.38 0-.76-.02-1.13-.07 2.08 1.34 4.56 2.13 7.23 2.13 8.67 0 13.4-7.16 13.4-13.4 0-.2-.01-.4-.02-.6.92-.66 1.72-1.48 2.36-2.42z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Columna 4: Newsletter y Apps -->
+            <div>
+                <h3 class="font-bold text-lg mb-4">Mantente Conectado</h3>
+                <p class="text-sm mb-4">Suscríbete a nuestro newsletter para recibir ofertas y novedades.</p>
+                <form class="flex mb-6">
+                    <input type="email" placeholder="Tu correo electrónico" class="p-3 rounded-l-md flex-grow text-black focus:outline-none focus:ring-2 focus:ring-red-500" />
+                    <button type="submit" class="bg-red-600 text-white p-3 rounded-r-md hover:bg-red-700 transition-colors duration-200">Suscribir</button>
+                </form>
+                <p class="text-sm mb-2">Descarga nuestra app:</p>
+                <div class="flex space-x-3">
+                    <a href="#" aria-label="App Store">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" class="h-10" loading="lazy" />
+                    </a>
+                    <a href="#" aria-label="Google Play">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="h-10" loading="lazy" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Derechos de Autor y Selección de País/Idioma -->
+        <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+            <p>&copy; <span id="current-year"></span> Sportia. Todos los derechos reservados.</p>
+            <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                <select class="bg-transparent text-white border border-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <option value="co">Colombia</option>
+                    <option value="us">United States</option>
+                    <option value="es">España</option>
+                </select>
+                <select class="bg-transparent text-white border border-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-black text-white p-3 rounded-full shadow-lg hover:bg-red-600 transition-colors duration-300 transform hover:scale-110 hidden" aria-label="Volver arriba">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m18 15-6-6-6 6"></path></svg>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Data Mock ---
+            const heroSlides = [
+                {
+                    id: 1,
+                    type: 'image',
+                    src: 'https://placehold.co/1920x800/000000/FFFFFF?text=Nueva+Colección+Running',
+                    videoSrc: 'https://cdn.shopify.com/s/files/1/0533/2089/files/hero_video_running.mp4?v=1613564500',
+                    title: 'Desata tu Velocidad',
+                    subtitle: 'Descubre lo último en calzado para correr.',
+                    cta: 'Compra Ahora',
+                },
+                {
+                    id: 2,
+                    type: 'image',
+                    src: 'https://placehold.co/1920x800/1A1A1A/FFFFFF?text=Colección+Basketball+2025',
+                    videoSrc: 'https://cdn.shopify.com/s/files/1/0533/2089/files/hero_video_basketball.mp4?v=1613564500',
+                    title: 'Domina la Cancha',
+                    subtitle: 'Equípate para la victoria.',
+                    cta: 'Explora Más',
+                },
+                {
+                    id: 3,
+                    type: 'image',
+                    src: 'https://placehold.co/1920x800/333333/FFFFFF?text=Entrenamiento+Intenso',
+                    videoSrc: 'https://cdn.shopify.com/s/files/1/0533/2089/files/hero_video_training.mp4?v=1613564500',
+                    title: 'Tu Mejor Versión',
+                    subtitle: 'Ropa y accesorios para cada desafío.',
+                    cta: 'Ver Productos',
+                },
+            ];
+
+            const featuredCollections = [
+                {
+                    id: 1,
+                    title: 'Running',
+                    gif: 'https://placehold.co/400x300/FF0000/FFFFFF?text=Running+GIF',
+                    cta: 'Ver Calzado',
+                    description: 'Descubre la tecnología que te impulsa.',
+                },
+                {
+                    id: 2,
+                    title: 'Basketball',
+                    gif: 'https://placehold.co/400x300/0000FF/FFFFFF?text=Basketball+GIF',
+                    cta: 'Ver Ropa',
+                    description: 'Estilo y rendimiento en cada salto.',
+                },
+                {
+                    id: 3,
+                    title: 'Fútbol',
+                    gif: 'https://placehold.co/400x300/008000/FFFFFF?text=Football+GIF',
+                    cta: 'Ver Guayos',
+                    description: 'Controla el juego con precisión.',
+                },
+                {
+                    id: 4,
+                    title: 'Entrenamiento',
+                    gif: 'https://placehold.co/400x300/FFA500/FFFFFF?text=Training+GIF',
+                    cta: 'Ver Accesorios',
+                    description: 'Equípate para superar tus límites.',
+                },
+            ];
+
+            const products = [
+                {
+                    id: 1,
+                    name: 'Zapatillas Air Max 270',
+                    category: 'Running',
+                    price: 150.00,
+                    rating: 4.5,
+                    colors: ['#000000', '#FFFFFF', '#FF0000'],
+                    image: 'https://placehold.co/300x300/000000/FFFFFF?text=Producto+1',
+                    altImage: 'https://placehold.co/300x300/333333/FFFFFF?text=Producto+1+Alt',
+                    description: 'Las zapatillas Air Max 270 ofrecen una comodidad inigualable y un estilo moderno, perfectas para el día a día o tus carreras ligeras.',
+                    sizes: ['US 7', 'US 8', 'US 9', 'US 10', 'US 11'],
+                    video: 'https://cdn.shopify.com/s/files/1/0533/2089/files/product_video_1.mp4?v=1613564500',
+                    reviews: [
+                        { id: 1, author: 'Juan P.', rating: 5, text: '¡Excelente producto, muy cómodas y con un diseño increíble!' },
+                        { id: 2, author: 'María G.', rating: 4, text: 'Me encantan, aunque la talla es un poco ajustada.' },
+                    ],
+                },
+                {
+                    id: 2,
+                    name: 'Camiseta Dri-FIT Pro',
+                    category: 'Entrenamiento',
+                    price: 45.00,
+                    rating: 4.8,
+                    colors: ['#000000', '#008000', '#0000FF'],
+                    image: 'https://placehold.co/300x300/1A1A1A/FFFFFF?text=Producto+2',
+                    altImage: 'https://placehold.co/300x300/444444/FFFFFF?text=Producto+2+Alt',
+                    description: 'La camiseta Dri-FIT Pro te mantiene seco y cómodo durante tus entrenamientos más intensos. Su tejido ligero y transpirable es ideal para cualquier actividad física.',
+                    sizes: ['S', 'M', 'L', 'XL'],
+                    reviews: [],
+                },
+                {
+                    id: 3,
+                    name: 'Balón de Baloncesto Elite',
+                    category: 'Basketball',
+                    price: 80.00,
+                    rating: 4.7,
+                    colors: ['#FFA500', '#000000'],
+                    image: 'https://placehold.co/300x300/333333/FFFFFF?text=Producto+3',
+                    altImage: 'https://placehold.co/300x300/555555/FFFFFF?text=Producto+3+Alt',
+                    description: 'El balón de baloncesto Elite ofrece un agarre superior y un control preciso, diseñado para jugadores que buscan el máximo rendimiento en la cancha.',
+                    sizes: ['Talla 7'],
+                    reviews: [
+                        { id: 1, author: 'Carlos R.', rating: 5, text: 'El mejor balón que he tenido, excelente agarre.' },
+                    ],
+                },
+                {
+                    id: 4,
+                    name: 'Leggings Epic Lux',
+                    category: 'Running',
+                    price: 90.00,
+                    rating: 4.6,
+                    colors: ['#000000', '#800080'],
+                    image: 'https://placehold.co/300x300/444444/FFFFFF?text=Producto+4',
+                    altImage: 'https://placehold.co/300x300/666666/FFFFFF?text=Producto+4+Alt',
+                    description: 'Los leggings Epic Lux combinan comodidad y soporte, ideales para correr o para tus sesiones de yoga. Su tejido elástico se adapta a cada movimiento.',
+                    sizes: ['XS', 'S', 'M', 'L'],
+                    reviews: [],
+                },
+                {
+                    id: 5,
+                    name: 'Guayos Mercurial Vapor',
+                    category: 'Fútbol',
+                    price: 220.00,
+                    rating: 4.9,
+                    colors: ['#FF0000', '#000000', '#00FF00'],
+                    image: 'https://placehold.co/300x300/555555/FFFFFF?text=Producto+5',
+                    altImage: 'https://placehold.co/300x300/777777/FFFFFF?text=Producto+5+Alt',
+                    description: 'Los guayos Mercurial Vapor están diseñados para la velocidad, con un ajuste ceñido y una tracción explosiva que te permite superar a tus oponentes.',
+                    sizes: ['EU 40', 'EU 41', 'EU 42', 'EU 43', 'EU 44'],
+                    reviews: [
+                        { id: 1, author: 'Andrés M.', rating: 5, text: 'Increíbles, muy ligeros y con un toque excelente.' },
+                    ],
+                },
+                {
+                    id: 6,
+                    name: 'Sudadera Tech Fleece',
+                    category: 'Entrenamiento',
+                    price: 110.00,
+                    rating: 4.7,
+                    colors: ['#000000', '#808080', '#FFFFFF'],
+                    image: 'https://placehold.co/300x300/666666/FFFFFF?text=Producto+6',
+                    altImage: 'https://placehold.co/300x300/888888/FFFFFF?text=Producto+6+Alt',
+                    description: 'La sudadera Tech Fleece ofrece calidez sin peso, perfecta para el calentamiento o para un look casual y deportivo.',
+                    sizes: ['S', 'M', 'L', 'XL'],
+                    reviews: [],
+                },
+            ];
+
+            let currentFilteredProducts = [...products];
+            let currentFilters = {
+                category: 'Todos',
+                size: 'Todos',
+                color: 'Todos',
+                price: [0, 500],
+                sport: 'Todos',
+            };
+
+            // --- DOM Elements ---
+            const header = document.getElementById('main-header');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenu = document.getElementById('close-mobile-menu');
+            const megaMenuTrigger = document.getElementById('mega-menu-trigger');
+            const megaMenu = document.getElementById('mega-menu');
+            const heroSliderContainer = document.getElementById('hero-slider-container');
+            const heroPrevBtn = document.getElementById('hero-prev');
+            const heroNextBtn = document.getElementById('hero-next');
+            const heroIndicatorsContainer = document.getElementById('hero-indicators');
+            const featuredCollectionsGrid = document.getElementById('featured-collections-grid');
+            const productGrid = document.getElementById('product-grid');
+            const categoryFilter = document.getElementById('category-filter');
+            const sizeFilter = document.getElementById('size-filter');
+            const colorFilter = document.getElementById('color-filter');
+            const loadMoreProductsBtn = document.getElementById('load-more-products');
+            const loadMoreProductsContainer = document.getElementById('load-more-products-container');
+            const productModal = document.getElementById('product-modal');
+            const closeProductModalBtn = document.getElementById('close-product-modal');
+            const productModalContent = document.getElementById('product-modal-content');
+            const customizerColorPicker = document.getElementById('color-picker');
+            const customizerTextInput = document.getElementById('text-input');
+            const customizerTextDisplay = document.getElementById('customizer-text-display');
+            const customizerColorOverlay = document.getElementById('customizer-color-overlay');
+            const saveCustomizationBtn = document.getElementById('save-customization');
+            const backToTopBtn = document.getElementById('back-to-top');
+            const currentYearSpan = document.getElementById('current-year');
+
+            // --- State Variables (simulated) ---
+            let currentHeroSlideIndex = 0;
+            let cartItemCount = 3; // Initial mock count
+
+            // --- Utility Functions ---
+            function updateCartCount() {
+                const cartCountElement = document.getElementById('cart-item-count');
+                if (cartCountElement) {
+                    cartCountElement.textContent = cartItemCount;
+                    if (cartItemCount > 0) {
+                        cartCountElement.classList.remove('hidden');
+                    } else {
+                        cartCountElement.classList.add('hidden');
+                    }
+                }
+            }
+
+            function generateStars(rating) {
+                let starsHtml = '';
+                for (let i = 0; i < 5; i++) {
+                    starsHtml += `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 ${i < Math.floor(rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+                }
+                return starsHtml;
+            }
+
+            // --- Header Logic ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('shadow-lg', 'bg-white/95', 'backdrop-blur-sm');
+                } else {
+                    header.classList.remove('shadow-lg', 'bg-white/95', 'backdrop-blur-sm');
+                }
+            });
+
+            // Mobile Menu Toggle
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('animate-slide-in-right');
+                document.body.style.overflow = mobileMenu.classList.contains('hidden') ? 'auto' : 'hidden';
+            });
+
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('animate-slide-in-right');
+                document.body.style.overflow = 'auto';
+            });
+
+            // Mega Menu Toggle
+            let megaMenuTimeout;
+            megaMenuTrigger.addEventListener('mouseenter', () => {
+                clearTimeout(megaMenuTimeout);
+                megaMenu.classList.remove('mega-menu-hidden');
+                megaMenu.classList.add('mega-menu-visible');
+            });
+            megaMenuTrigger.addEventListener('mouseleave', () => {
+                megaMenuTimeout = setTimeout(() => {
+                    megaMenu.classList.remove('mega-menu-visible');
+                    megaMenu.classList.add('mega-menu-hidden');
+                }, 200); // Small delay to allow mouse to enter mega menu
+            });
+            megaMenu.addEventListener('mouseenter', () => {
+                clearTimeout(megaMenuTimeout);
+            });
+            megaMenu.addEventListener('mouseleave', () => {
+                megaMenuTimeout = setTimeout(() => {
+                    megaMenu.classList.remove('mega-menu-visible');
+                    megaMenu.classList.add('mega-menu-hidden');
+                }, 200);
+            });
+
+
+            // --- Hero Slider Logic ---
+            function renderHeroSlides() {
+                heroSliderContainer.innerHTML = '';
+                heroIndicatorsContainer.innerHTML = '';
+
+                heroSlides.forEach((slide, index) => {
+                    const slideDiv = document.createElement('div');
+                    slideDiv.className = 'w-full flex-shrink-0 relative';
+
+                    if (slide.type === 'video') {
+                        slideDiv.innerHTML = `
+                            <video class="w-full h-full object-cover absolute inset-0" src="${slide.videoSrc}" autoplay loop muted playsinline preload="auto">
+                                Tu navegador no soporta el tag de video.
+                            </video>
+                        `;
+                    } else {
+                        slideDiv.innerHTML = `
+                            <img src="${slide.src}" alt="${slide.title}" class="w-full h-full object-cover absolute inset-0 transform translate-z-0 transition-transform duration-1000 ease-out" loading="lazy" />
+                        `;
+                    }
+
+                    const contentDiv = document.createElement('div');
+                    contentDiv.className = 'absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center p-4 animate-fade-in';
+                    contentDiv.innerHTML = `
+                        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">${slide.title}</h1>
+                        <p class="text-xl md:text-2xl text-white mb-8 max-w-2xl drop-shadow">${slide.subtitle}</p>
+                        <button class="bg-white text-black px-8 py-3 rounded-full font-bold text-lg hover:bg-red-600 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            ${slide.cta}
+                        </button>
+                    `;
+                    slideDiv.appendChild(contentDiv);
+                    heroSliderContainer.appendChild(slideDiv);
+
+                    // Add indicator
+                    const indicatorButton = document.createElement('button');
+                    indicatorButton.className = `w-3 h-3 rounded-full transition-all duration-300 ${currentHeroSlideIndex === index ? 'bg-white scale-125' : 'bg-white/50'}`;
+                    indicatorButton.setAttribute('aria-label', `Ir al slide ${index + 1}`);
+                    indicatorButton.addEventListener('click', () => {
+                        currentHeroSlideIndex = index;
+                        updateHeroSlider();
+                    });
+                    heroIndicatorsContainer.appendChild(indicatorButton);
+                });
+                updateHeroSlider(); // Initial update
+            }
+
+            function updateHeroSlider() {
+                heroSliderContainer.style.transform = `translateX(-${currentHeroSlideIndex * 100}%)`;
+                // Update parallax effect for images
+                heroSlides.forEach((slide, index) => {
+                    const img = heroSliderContainer.children[index]?.querySelector('img');
+                    if (img) {
+                        img.style.transform = `scale(${index === currentHeroSlideIndex ? '1.05' : '1.0'})`;
+                    }
+                });
+
+                // Update indicators
+                Array.from(heroIndicatorsContainer.children).forEach((indicator, index) => {
+                    if (index === currentHeroSlideIndex) {
+                        indicator.classList.add('bg-white', 'scale-125');
+                        indicator.classList.remove('bg-white/50');
+                    } else {
+                        indicator.classList.remove('bg-white', 'scale-125');
+                        indicator.classList.add('bg-white/50');
+                    }
+                });
+            }
+
+            function nextHeroSlide() {
+                currentHeroSlideIndex = (currentHeroSlideIndex + 1) % heroSlides.length;
+                updateHeroSlider();
+            }
+
+            function prevHeroSlide() {
+                currentHeroSlideIndex = (currentHeroSlideIndex - 1 + heroSlides.length) % heroSlides.length;
+                updateHeroSlider();
+            }
+
+            heroNextBtn.addEventListener('click', nextHeroSlide);
+            heroPrevBtn.addEventListener('click', prevHeroSlide);
+
+            let heroSliderInterval = setInterval(nextHeroSlide, 5000); // Auto-advance
+
+            // Pause/resume on hover (optional, but good UX)
+            heroSliderContainer.parentElement.addEventListener('mouseenter', () => clearInterval(heroSliderInterval));
+            heroSliderContainer.parentElement.addEventListener('mouseleave', () => {
+                heroSliderInterval = setInterval(nextHeroSlide, 5000);
+            });
+
+            // --- Featured Collections Logic ---
+            function renderFeaturedCollections() {
+                featuredCollectionsGrid.innerHTML = '';
+                featuredCollections.forEach(collection => {
+                    const colDiv = document.createElement('div');
+                    colDiv.className = 'relative rounded-lg overflow-hidden shadow-lg group animate-on-scroll transform transition-transform duration-300 hover:scale-105';
+                    colDiv.innerHTML = `
+                        <img src="${collection.gif}" alt="${collection.title}" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" />
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 group-hover:bg-opacity-60">
+                            <h3 class="text-2xl font-bold text-white mb-2">${collection.title}</h3>
+                            <p class="text-white text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">${collection.description}</p>
+                            <button class="bg-white text-black px-6 py-2 rounded-full font-bold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-105 hover:bg-red-600 hover:text-white">
+                                ${collection.cta}
+                            </button>
+                        </div>
+                    `;
+                    featuredCollectionsGrid.appendChild(colDiv);
+                });
+            }
+
+            // --- Product Listing & Filters Logic ---
+            function getUniqueOptions(data, key) {
+                const options = new Set(['Todos']);
+                data.forEach(item => {
+                    if (Array.isArray(item[key])) {
+                        item[key].forEach(val => options.add(val));
+                    } else if (item[key]) {
+                        options.add(item[key]);
+                    }
+                });
+                return Array.from(options);
+            }
+
+            function populateFilterOptions() {
+                const uniqueCategories = getUniqueOptions(products, 'category');
+                const uniqueSizes = getUniqueOptions(products, 'sizes');
+                const uniqueColors = getUniqueOptions(products, 'colors');
+                // For simplicity, using category as sport. Adjust if 'sport' is a distinct property.
+                const uniqueSports = getUniqueOptions(products, 'category');
+
+                categoryFilter.innerHTML = uniqueCategories.map(cat => `<option value="${cat}">${cat} (${products.filter(p => currentFilters.category === 'Todos' || p.category === cat).length})</option>`).join('');
+                sizeFilter.innerHTML = uniqueSizes.map(size => `<option value="${size}">${size}</option>`).join('');
+                colorFilter.innerHTML = uniqueColors.map(color => `<option value="${color}">${color}</option>`).join('');
+
+                categoryFilter.value = currentFilters.category;
+                sizeFilter.value = currentFilters.size;
+                colorFilter.value = currentFilters.color;
+            }
+
+            function applyFilters() {
+                let tempProducts = [...products];
+
+                if (currentFilters.category !== 'Todos') {
+                    tempProducts = tempProducts.filter(product => product.category === currentFilters.category);
+                }
+                if (currentFilters.size !== 'Todos') {
+                    tempProducts = tempProducts.filter(product => product.sizes && product.sizes.includes(currentFilters.size));
+                }
+                if (currentFilters.color !== 'Todos') {
+                    tempProducts = tempProducts.filter(product => product.colors && product.colors.includes(currentFilters.color));
+                }
+                // Add more filter logic for price, sport etc.
+
+                currentFilteredProducts = tempProducts;
+                renderProductGrid();
+                // Show/hide "Ver Más" button based on filtered products vs total
+                if (currentFilteredProducts.length < products.length) {
+                    loadMoreProductsContainer.classList.remove('hidden');
+                } else {
+                    loadMoreProductsContainer.classList.add('hidden');
+                }
+            }
+
+            function renderProductGrid() {
+                productGrid.innerHTML = ''; // Clear existing products
+                currentFilteredProducts.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'bg-white rounded-lg shadow-md overflow-hidden group cursor-pointer animate-on-scroll transform transition-transform duration-300 hover:scale-105';
+                    productDiv.setAttribute('data-product-id', product.id); // Store ID for modal
+
+                    productDiv.innerHTML = `
+                        <div class="relative w-full h-64 overflow-hidden">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300" loading="lazy" />
+                            <img src="${product.altImage}" alt="${product.name} - Vista Alternativa" class="w-full h-full object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" loading="lazy" />
+                            <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                ${product.colors.map(color => `<span class="w-3 h-3 rounded-full border border-gray-300" style="background-color: ${color};"></span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold mb-1">${product.name}</h3>
+                            <p class="text-gray-600 text-sm mb-2">${product.category}</p>
+                            <div class="flex items-center mb-2">
+                                ${generateStars(product.rating)}
+                                <span class="text-sm text-gray-600 ml-1">(${product.rating})</span>
+                            </div>
+                            <p class="text-xl font-bold text-red-600">$${product.price.toFixed(2)}</p>
+                        </div>
+                    `;
+                    productGrid.appendChild(productDiv);
+
+                    // Add click listener to open modal
+                    productDiv.addEventListener('click', () => openProductModal(product));
+                });
+                observeScrollAnimations(); // Re-observe new elements
+            }
+
+            categoryFilter.addEventListener('change', (e) => {
+                currentFilters.category = e.target.value;
+                applyFilters();
+            });
+            sizeFilter.addEventListener('change', (e) => {
+                currentFilters.size = e.target.value;
+                applyFilters();
+            });
+            colorFilter.addEventListener('change', (e) => {
+                currentFilters.color = e.target.value;
+                applyFilters();
+            });
+
+            loadMoreProductsBtn.addEventListener('click', () => {
+                currentFilteredProducts = products; // For simplicity, load all
+                renderProductGrid();
+                loadMoreProductsContainer.classList.add('hidden');
+            });
+
+            // --- Product Modal Logic ---
+            function openProductModal(product) {
+                productModalContent.innerHTML = `
+                    <div class="w-full md:w-1/2">
+                        <div class="relative mb-4 rounded-lg overflow-hidden">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-auto object-cover" loading="lazy" />
+                            ${product.video ? `
+                            <video src="${product.video}" loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-0 hover:opacity-100 transition-opacity duration-300"></video>
+                            ` : ''}
+                        </div>
+                        <div class="grid grid-cols-4 gap-2">
+                            <img src="${product.altImage}" alt="Producto vista 2" class="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80" loading="lazy" />
+                            <img src="https://placehold.co/100x100/A0A0A0/FFFFFF?text=Img3" alt="Producto vista 3" class="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80" loading="lazy" />
+                            <img src="https://placehold.co/100x100/B0B0B0/FFFFFF?text=Img4" alt="Producto vista 4" class="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80" loading="lazy" />
+                            <img src="https://placehold.co/100x100/C0C0C0/FFFFFF?text=Img5" alt="Producto vista 5" class="w-full h-20 object-cover rounded-md cursor-pointer hover:opacity-80" loading="lazy" />
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-1/2">
+                        <h2 class="text-3xl font-bold mb-2">${product.name}</h2>
+                        <p class="text-gray-600 text-lg mb-4">$${product.price.toFixed(2)}</p>
+
+                        <div class="flex items-center mb-4">
+                            ${generateStars(product.rating)}
+                            <span class="text-sm text-gray-600 ml-2">(${product.rating} Promedio)</span>
+                        </div>
+
+                        <p class="text-gray-700 mb-6 leading-relaxed">${product.description}</p>
+
+                        <div class="mb-6">
+                            <h3 class="text-md font-semibold mb-2">Selecciona tu Talla</h3>
+                            <div class="grid grid-cols-4 gap-2">
+                                ${product.sizes.map(size => `
+                                    <button class="border border-gray-300 rounded-md p-3 text-sm font-medium hover:border-black focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors duration-200">
+                                        ${size}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="text-md font-semibold mb-2">Colores Disponibles</h3>
+                            <div class="flex space-x-2">
+                                ${product.colors.map(color => `
+                                    <button class="w-8 h-8 rounded-full border-2 border-transparent hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200" style="background-color: ${color};" aria-label="Color ${color}"></button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="text-md font-semibold mb-2">Cantidad</h3>
+                            <input type="number" min="1" value="1" class="w-20 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-red-500 focus:border-red-500" />
+                        </div>
+
+                        <div class="flex space-x-4 mb-8">
+                            <button class="flex-1 bg-black text-white px-6 py-3 rounded-full font-bold text-lg hover:bg-red-600 transition-colors duration-300 transform hover:scale-105 shadow-lg">
+                                Añadir al Carrito
+                            </button>
+                            <button class="p-3 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors duration-200" aria-label="Guardar en favoritos">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-gray-700"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                            </button>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-6 mt-6">
+                            <h3 class="text-xl font-bold mb-4">Opiniones de Clientes (${product.reviews.length})</h3>
+                            ${product.reviews.length > 0 ? `
+                                <div class="space-y-4">
+                                    ${product.reviews.map(review => `
+                                        <div class="bg-gray-50 p-4 rounded-lg">
+                                            <div class="flex items-center mb-2">
+                                                ${generateStars(review.rating)}
+                                                <span class="text-sm font-semibold ml-2">${review.author}</span>
+                                            </div>
+                                            <p class="text-gray-700 text-sm">${review.text}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : `
+                                <p class="text-gray-600">Sé el primero en dejar una opinión sobre este producto.</p>
+                            `}
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-6 mt-6">
+                            <h3 class="text-xl font-bold mb-4">Productos Relacionados</h3>
+                            <div class="flex space-x-4 overflow-x-auto pb-4 hide-scrollbar">
+                                ${products.slice(0, 3).map(relatedProduct => `
+                                    <div class="flex-shrink-0 w-40">
+                                        <img src="${relatedProduct.image}" alt="${relatedProduct.name}" class="w-full h-32 object-cover rounded-md mb-2" loading="lazy" />
+                                        <p class="text-sm font-semibold truncate">${relatedProduct.name}</p>
+                                        <p class="text-xs text-gray-600">$${relatedProduct.price.toFixed(2)}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+
+            closeProductModalBtn.addEventListener('click', () => {
+                productModal.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            });
+
+            // --- Customizer Logic ---
+            customizerColorPicker.addEventListener('input', (e) => {
+                const newColor = e.target.value;
+                customizerColorOverlay.style.backgroundColor = newColor;
+                customizerTextDisplay.style.color = newColor;
+            });
+
+            customizerTextInput.addEventListener('input', (e) => {
+                customizerTextDisplay.textContent = e.target.value || 'TU LOGO';
+            });
+
+            saveCustomizationBtn.addEventListener('click', () => {
+                console.log('¡Diseño guardado! Color: ' + customizerColorPicker.value + ', Texto: ' + customizerTextInput.value);
+                // In a real app, you'd send this data to a server or add to cart
+            });
+
+            // --- Scroll Animations (Intersection Observer) ---
+            function observeScrollAnimations() {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('animate-fade-in-up');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    { threshold: 0.1 }
+                );
+
+                document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+                    observer.observe(el);
+                });
+            }
+
+            // --- Back to Top Button Logic ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { // Show button after scrolling 300px
+                    backToTopBtn.classList.remove('hidden');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // --- Initial Renders & Setup ---
+            renderHeroSlides();
+            renderFeaturedCollections();
+            populateFilterOptions();
+            applyFilters(); // Initial render of products
+            updateCartCount(); // Set initial cart count
+
+            // Set current year in footer
+            currentYearSpan.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
